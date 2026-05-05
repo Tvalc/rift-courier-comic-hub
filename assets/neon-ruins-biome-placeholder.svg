@@ -1,0 +1,27 @@
+<svg width="900" height="420" viewBox="0 0 900 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="420" rx="12" fill="#111C2E"/>
+  <rect x="8" y="8" width="884" height="404" rx="8" stroke="rgba(255,255,255,0.1)"/>
+
+  <rect y="292" width="900" height="128" fill="#0D1524"/>
+  <path d="M0 292L118 262L209 280L311 236L378 250L470 206L590 246L672 220L781 248L900 216V292H0Z" fill="#152338"/>
+  <path d="M0 312L116 278L208 294L315 253L386 270L482 230L602 267L682 244L788 274L900 239V312H0Z" fill="#1A2D48"/>
+
+  <rect x="72" y="184" width="44" height="108" fill="#172740"/>
+  <rect x="138" y="144" width="52" height="148" fill="#172740"/>
+  <rect x="216" y="165" width="34" height="127" fill="#172740"/>
+  <rect x="625" y="150" width="48" height="142" fill="#172740"/>
+  <rect x="700" y="130" width="55" height="162" fill="#172740"/>
+  <rect x="780" y="170" width="38" height="122" fill="#172740"/>
+
+  <rect x="146" y="156" width="36" height="4" fill="#3B8EDF"/>
+  <rect x="146" y="170" width="36" height="4" fill="#3B8EDF"/>
+  <rect x="709" y="146" width="36" height="4" fill="#3B8EDF"/>
+  <rect x="709" y="160" width="36" height="4" fill="#3B8EDF"/>
+
+  <circle cx="320" cy="108" r="28" fill="rgba(59,142,223,0.16)"/>
+  <circle cx="580" cy="86" r="18" fill="rgba(59,142,223,0.20)"/>
+  <circle cx="542" cy="124" r="8" fill="rgba(59,142,223,0.28)"/>
+
+  <text x="28" y="46" fill="#DCEBFF" font-family="Inter, Segoe UI, sans-serif" font-size="26" font-weight="700">Neon Ruins Biome Placeholder</text>
+  <text x="28" y="76" fill="#9CB2CF" font-family="Inter, Segoe UI, sans-serif" font-size="15">Week 01 fracture district art blockout with Makko palette alignment.</text>
+</svg>
