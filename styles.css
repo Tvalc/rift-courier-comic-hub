@@ -1730,6 +1730,37 @@ code {
   color: var(--cyan);
 }
 
+.novel-chapter-page .nav a,
+.novel-hub .nav a,
+.novel-chapter-page .site-footer__links a,
+.novel-hub .site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.72rem;
+  border: 2px solid #0a0e18;
+  border-radius: 4px;
+  background: #f5d547;
+  color: #0a0e18;
+  text-decoration: none;
+  box-shadow: 2px 2px 0 #0a0e18;
+}
+
+.novel-chapter-page .nav a:hover,
+.novel-hub .nav a:hover,
+.novel-chapter-page .site-footer__links a:hover,
+.novel-hub .site-footer__links a:hover {
+  color: #0a0e18;
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0 #0a0e18;
+}
+
+.novel-chapter-page .nav a[aria-current="page"],
+.novel-hub .nav a[aria-current="page"] {
+  color: #0a0e18;
+  background: #ffd96a;
+}
+
 .beer-page .site-header.site-header--over-dark {
   background: linear-gradient(180deg, rgba(2, 4, 10, 0.94), rgba(2, 4, 10, 0.55) 55%, transparent);
   border-bottom-color: transparent;
