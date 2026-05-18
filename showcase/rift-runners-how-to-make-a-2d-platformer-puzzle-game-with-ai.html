@@ -674,8 +674,9 @@
     }
     .before-after-grid__blank {
       width: 100%;
-      height: auto;
+      height: clamp(44px, 6vw, 84px);
       background: #f7f7f7;
+      object-fit: cover;
     }
     .before-after-grid figcaption {
       position: relative;
