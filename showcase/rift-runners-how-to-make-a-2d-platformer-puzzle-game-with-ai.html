@@ -656,7 +656,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 10px;
-      align-items: stretch;
     }
     .before-after-grid figure {
       margin: 0;
@@ -664,23 +663,18 @@
       border-radius: 4px;
       overflow: hidden;
       background: #0f1a2b;
-      display: flex;
-      flex-direction: column;
-      height: clamp(560px, 72vw, 900px);
     }
     .before-after-grid img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: contain;
       display: block;
       border-bottom: 2px solid #0a0e18;
       background: #d9d9d9;
-      flex: 1 1 0;
-      min-height: 0;
     }
     .before-after-grid__blank {
-      flex: 0 0 34%;
-      object-fit: contain;
+      width: 100%;
+      height: auto;
       background: #f7f7f7;
     }
     .before-after-grid figcaption {
@@ -1203,11 +1197,11 @@ Break work into discrete implementation phases and request a markdown plan with 
         <div class="before-after-grid" aria-label="Human in the loop before and after example">
           <figure>
             <img src="./assets/human-in-loop-before-sketch.png" alt="Simple hand-drawn sketch used as creative input" />
+            <img class="before-after-grid__blank" src="./RRDrawingblank.png" alt="Blank drawing panel insert" />
             <figcaption>Before: quick sketch</figcaption>
           </figure>
           <figure>
             <img src="./RR-Update-panel-04-right-tall.png" alt="Rift Runners panel 04 right, tall city sprint visual" />
-            <img class="before-after-grid__blank" src="./RRDrawingblank.png" alt="Blank drawing panel insert" />
             <figcaption>Right panel: Rift city sprint visual</figcaption>
           </figure>
         </div>
