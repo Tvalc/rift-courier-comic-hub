@@ -674,11 +674,10 @@
     }
     .before-after-grid__blank {
       width: 100%;
-      height: 18px !important;
-      min-height: 18px !important;
-      max-height: 18px !important;
-      background: #f7f7f7;
-      object-fit: fill;
+      height: 18px;
+      min-height: 18px;
+      max-height: 18px;
+      background: #ffffff;
     }
     .before-after-grid figcaption {
       position: relative;
@@ -1199,12 +1198,12 @@ Break work into discrete implementation phases and request a markdown plan with 
         <h3>Human review is the quality gate. Judgment keeps output intentional.</h3>
         <div class="before-after-grid" aria-label="Human in the loop before and after example">
           <figure>
-            <img src="./assets/human-in-loop-before-sketch.png" alt="Simple hand-drawn sketch used as creative input" />
-            <img class="before-after-grid__blank" src="./RRDrawingblank.png" alt="Blank drawing panel insert" />
+            <img class="before-after-grid__left-main" src="./assets/human-in-loop-before-sketch.png" alt="Simple hand-drawn sketch used as creative input" />
+            <div class="before-after-grid__blank" aria-hidden="true"></div>
             <figcaption>Before: quick sketch</figcaption>
           </figure>
           <figure>
-            <img src="./RR-Update-panel-04-right-tall.png" alt="Rift Runners panel 04 right, tall city sprint visual" />
+            <img class="before-after-grid__right-main" src="./RR-Update-panel-04-right-tall.png" alt="Rift Runners panel 04 right, tall city sprint visual" />
             <figcaption>Right panel: Rift city sprint visual</figcaption>
           </figure>
         </div>
@@ -1434,6 +1433,29 @@ Break work into discrete implementation phases and request a markdown plan with 
       };
 
       buttons.forEach((btn) => btn.addEventListener("click", () => setActive(btn)));
+    })();
+
+    (() => {
+      const leftMain = document.querySelector("#ai-philosophy .before-after-grid__left-main");
+      const rightMain = document.querySelector("#ai-philosophy .before-after-grid__right-main");
+      const blank = document.querySelector("#ai-philosophy .before-after-grid__blank");
+      if (!leftMain || !rightMain || !blank) return;
+
+      const syncBlankHeight = () => {
+        const leftH = leftMain.getBoundingClientRect().height;
+        const rightH = rightMain.getBoundingClientRect().height;
+        const gap = Math.max(0, Math.round(rightH - leftH));
+        blank.style.height = `${gap}px`;
+        blank.style.minHeight = `${gap}px`;
+        blank.style.maxHeight = `${gap}px`;
+      };
+
+      const run = () => requestAnimationFrame(syncBlankHeight);
+      window.addEventListener("load", run);
+      window.addEventListener("resize", run);
+      leftMain.addEventListener("load", run);
+      rightMain.addEventListener("load", run);
+      run();
     })();
   </script>
 </body>
