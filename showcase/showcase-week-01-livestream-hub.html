@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Week 01 — Makko weekly live build: animation UX, Sector Scavengers HUD, Neon Rift parallel code and concept art. Where to watch, Discord, and what we are exploring." />
+  <title>Makko Weekly Live Build | Week 01</title>
+  <style>
+    :root {
+      --studio-nav: #080e1a;
+      --studio-subheader: #0d1524;
+      --studio-canvas: #111c2e;
+      --studio-tabs: #152338;
+      --studio-cards: #172740;
+      --studio-tabs-hover: #1a2d48;
+      --studio-accent: #3b8edf;
+      --text-main: #e8f1ff;
+      --text-muted: #9cb2cf;
+      --border-strong: rgba(255, 255, 255, 0.1);
+      --border-medium: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.05);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text-main);
+      line-height: 1.45;
+      background: radial-gradient(1200px 500px at 80% -10%, rgba(59, 142, 223, 0.24), transparent 60%),
+        radial-gradient(700px 300px at 20% 10%, rgba(157, 77, 255, 0.18), transparent 65%),
+        linear-gradient(135deg, #080e1a 0%, #152338 52%, #1a2d48 100%);
+    }
+    .shell { max-width: 1280px; margin: 0 auto; padding: 18px; }
+    .topbar {
+      position: sticky; top: 12px; z-index: 20; margin-bottom: 16px;
+      backdrop-filter: blur(8px); background: rgba(8, 14, 26, 0.86);
+      border: 1px solid var(--border-strong); border-radius: 4px; padding: 12px 14px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.2px; }
+    .brand img { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--border-medium); }
+    .btn {
+      border-radius: 6px; border: 1px solid var(--border-strong); color: var(--text-main);
+      background: transparent; padding: 9px 12px; font-size: 14px; text-decoration: none;
+      display: inline-block; margin-left: 8px;
+    }
+    .btn.primary {
+      background: var(--studio-accent); border-color: rgba(59, 142, 223, 0.7);
+      box-shadow: 0 0 18px rgba(59, 142, 223, 0.25);
+    }
+    .btn.trailer {
+      background: rgba(126, 231, 255, 0.15); border-color: rgba(126, 231, 255, 0.45);
+      box-shadow: 0 0 18px rgba(126, 231, 255, 0.2);
+    }
+    .eyebrow {
+      color: var(--studio-accent); font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .live-pill {
+      display: inline-block; background: rgba(255, 80, 80, 0.12);
+      border: 1px solid rgba(255, 120, 120, 0.35); color: #ffc9c9;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 999px; margin-bottom: 10px;
+    }
+    .hero {
+      border: 1px solid var(--border-strong); border-radius: 4px; overflow: hidden;
+      background: var(--studio-subheader); margin-bottom: 14px;
+    }
+    .hero-art {
+      position: relative; min-height: 440px;
+      background: linear-gradient(to right, rgba(8, 14, 26, 0.92), rgba(8, 14, 26, 0.42)),
+        url("./assets/neon-ruins-biome-placeholder.svg") center/cover no-repeat;
+      padding: 28px 30px 34px; display: flex; align-items: flex-end;
+    }
+    .hero-copy { max-width: 720px; position: relative; z-index: 2; }
+    .trailer-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .trailer-row .btn { margin-left: 0; }
+    h1, h2, h3 { margin: 0 0 10px; }
+    h1 { font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; }
+    p { margin: 0 0 10px; color: var(--text-muted); }
+    .answer-first {
+      margin-top: 14px; background: rgba(59, 142, 223, 0.14);
+      border: 1px solid rgba(59, 142, 223, 0.24); border-radius: 4px; padding: 12px 14px;
+      color: #dbe9ff; max-width: 700px;
+    }
+    .hero-metrics {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px;
+      border-top: 1px solid var(--border-strong); background: var(--studio-nav);
+    }
+    .metric {
+      background: var(--studio-tabs); border: 1px solid var(--border-subtle);
+      border-radius: 4px; padding: 10px;
+    }
+    .metric strong { display: block; font-size: 20px; color: #fff; margin-top: 2px; }
+    .muted { color: var(--text-muted); font-size: 13px; }
+    .watch-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px; margin-top: 12px;
+    }
+    .watch-grid .btn { margin-left: 0; text-align: center; }
+    .layout { display: grid; grid-template-columns: 1.75fr 1fr; gap: 14px; }
+    .card {
+      background: var(--studio-cards); border: 1px solid var(--border-medium);
+      border-radius: 4px; padding: 16px; margin-bottom: 14px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip {
+      background: rgba(59, 142, 223, 0.16); border: 1px solid rgba(59, 142, 223, 0.28);
+      border-radius: 999px; color: #dcecff; padding: 4px 10px; font-size: 12px; font-weight: 600;
+    }
+    ul { margin: 0; padding-left: 20px; color: var(--text-muted); }
+    li { margin-bottom: 8px; }
+    .timeline { display: grid; gap: 8px; margin-top: 10px; }
+    .step {
+      background: var(--studio-tabs); border: 1px solid var(--border-subtle);
+      border-radius: 4px; padding: 10px; display: grid;
+      grid-template-columns: 34px 1fr; gap: 8px; align-items: start;
+    }
+    .badge {
+      width: 34px; height: 34px; border-radius: 4px; background: rgba(59, 142, 223, 0.22);
+      border: 1px solid rgba(59, 142, 223, 0.35); display: grid; place-items: center;
+      color: #cde4ff; font-weight: 800; font-size: 13px;
+    }
+    .chapter-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--studio-tabs); border: 1px solid var(--border-subtle);
+      border-radius: 4px; padding: 9px 10px; margin-bottom: 8px; font-size: 14px;
+    }
+    .chapter-row span:first-child { color: var(--studio-accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .faq { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle); }
+    .faq h4 { font-size: 15px; margin: 0 0 6px; color: #f3f7ff; }
+    .cta-strip {
+      background: var(--studio-nav); border: 1px solid var(--border-strong); border-radius: 4px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      padding: 14px 16px; flex-wrap: wrap;
+    }
+    .discord-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .discord-row img { width: 120px; height: auto; border-radius: 6px; border: 1px solid var(--border-medium); }
+    iframe { border-radius: 4px; border: 1px solid var(--border-subtle); background: #000; width: 100%; display: block; }
+    .scene-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0 18px; }
+    .scene-card {
+      background: var(--studio-cards); border: 1px solid var(--border-medium);
+      border-radius: 4px; overflow: hidden;
+    }
+    .scene-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .scene-card .copy { padding: 12px; border-top: 1px solid var(--border-subtle); }
+    .notice {
+      font-size: 13px; color: #c8daf5; background: rgba(255, 193, 7, 0.08);
+      border: 1px solid rgba(255, 193, 7, 0.22); border-radius: 4px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    @media (max-width: 980px) {
+      .layout, .scene-strip, .hero-metrics { grid-template-columns: 1fr; }
+      .topbar { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="./assets/makko-mark-placeholder.svg" alt="Makko" />
+        <span>Makko AI • Weekly Live Build</span>
+      </div>
+      <nav class="rr-global-nav" aria-label="Rift Runners site" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+        <a class="btn" href="/showcase/index.html">Weekly drops</a>
+        <a class="btn" href="/lore/novel/index.html">Graphic novel</a>
+      </nav>
+      <div>
+        <a class="btn" href="#">Art Studio</a>
+        <a class="btn" href="#">Code Studio</a>
+        <a class="btn primary" href="#">Join Discord</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-art">
+        <div class="hero-copy">
+          <div class="live-pill">Preview — fill times & URLs before publish</div>
+          <div class="eyebrow">Episode 001 • Week 01 hub</div>
+          <h1>Three hours of real build work — Makko, Sector Scavengers, Neon Rift</h1>
+          <p>
+            This hub is tuned for <strong>Week 1 of the weekly livestream</strong>: co-work with Jeremy and Tony,
+            a flagship hour with Brandon on <em>Neon Rift</em> (parallel code + concept art), and marketing lanes
+            (video, SEO, Discord) on camera for that block — not a packaged “everything shipped” narrative.
+          </p>
+          <div class="answer-first">
+            <strong>Answer-first:</strong> Week 01 is a <strong>~3 hour live devlog</strong> focused on
+            <strong>clearer animation paths in Makko</strong>, <strong>Sector Scavengers HUD / menu / meta</strong>,
+            and <strong>Neon Rift live coding alongside concept art</strong>, plus Discord questions and contest CTAs.
+            Finished features by minute 180 are <strong>not</strong> promised — you see how the team explores and decides.
+          </div>
+          <div class="trailer-row">
+            <a class="btn trailer" href="#">Add to calendar (.ics)</a>
+            <a class="btn primary" href="#">Primary watch link (TBD)</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><span class="muted">Format</span><strong>~3 hr</strong></div>
+        <div class="metric"><span class="muted">Flagship block</span><strong>Neon Rift</strong></div>
+        <div class="metric"><span class="muted">Chat</span><strong>Tony-led</strong></div>
+        <div class="metric"><span class="muted">Week</span><strong>01</strong></div>
+      </div>
+    </section>
+
+    <p class="notice">
+      Replace placeholder <code>#</code> links with your link hub (Twitch, YouTube, TikTok Live, X, Instagram, Facebook),
+      Discord invite, giveaway rules, and wall-clock start in your timezone.
+    </p>
+
+    <section class="scene-strip">
+      <article class="scene-card">
+        <img src="./assets/hud-panel-placeholder.svg" alt="HUD and UI placeholder" />
+        <div class="copy">
+          <h3>Makko • Animation UX</h3>
+          <p>Jeremy: pipeline rethink, character + animation navigation; optional prompt-expansion thread.</p>
+        </div>
+      </article>
+      <article class="scene-card">
+        <img src="./assets/pixel-neon-scene-example.svg" alt="Neon scene example" />
+        <div class="copy">
+          <h3>Sector Scavengers</h3>
+          <p>Tony: HUD, menus, meta progression — plus chat stewardship across the full show.</p>
+        </div>
+      </article>
+      <article class="scene-card">
+        <img src="./assets/rift-ui-elite.svg" alt="Neon Rift UI concept" />
+        <div class="copy">
+          <h3>Neon Rift • Split desk</h3>
+          <p>Brandon codes; Cesar + Tony on concept art; review pins with Jeremy.</p>
+        </div>
+      </article>
+    </section>
+
+    <div class="layout">
+      <main>
+        <section class="card">
+          <h2>Watch live (simulcast)</h2>
+          <p>Same show; pick one player to follow chat, or use your link hub. Primary chat for on-stream pulls: <strong>(set per week)</strong>.</p>
+          <div class="watch-grid">
+            <a class="btn" href="#">Twitch</a>
+            <a class="btn" href="#">YouTube</a>
+            <a class="btn" href="#">TikTok Live</a>
+            <a class="btn" href="#">X</a>
+            <a class="btn" href="#">Instagram</a>
+            <a class="btn" href="#">Facebook</a>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>What is on stream this week</h2>
+          <ul>
+            <li><strong>Jeremy</strong> — Makko: animations pipeline, character + animation navigation; joins Neon Rift <strong>review pins</strong>.</li>
+            <li><strong>Tony</strong> — Sector Scavengers: HUD / menu / meta; <strong>live chat owner</strong> all show; concept art with Cesar during flagship.</li>
+            <li><strong>Brandon</strong> — Neon Rift: <strong>live coding</strong> (scaffold, loops, honest stubs).</li>
+            <li><strong>Cesar</strong> — Video + concept art; <strong>full flagship hour</strong> at desk with optional short pre/post hits.</li>
+            <li><strong>Kyle</strong> — SEO show-and-tell; flagship hour + optional short slot (e.g. late Block A).</li>
+            <li><strong>Dragoon</strong> — Discord structure, contests, giveaway copy; transition + flagship + outro beats.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Exploration-first</span>
+            <span class="chip">Shape B parallel desks</span>
+            <span class="chip">Discord week questions</span>
+            <span class="chip">Tag J / T / B / C</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Viewer-friendly run of show (digest)</h2>
+          <div class="timeline">
+            <div class="step"><div class="badge">0</div><div><strong>Cold open</strong><p>Games + casual chat; 2–4 Discord questions from the week; hook + logistics + contest one-liner.</p></div></div>
+            <div class="step"><div class="badge">1</div><div><strong>Roadmap triad</strong><p>Theme → last week → this week → next week (clip-friendly).</p></div></div>
+            <div class="step"><div class="badge">2</div><div><strong>Block A — Co-work</strong><p>Jeremy (Makko) + Tony (SS + chat). Deep work passes and Tony-led check-in.</p></div></div>
+            <div class="step"><div class="badge">3</div><div><strong>Transition</strong><p>Bio break; bring marketing on for flagship; Dragoon can restate contest + Discord.</p></div></div>
+            <div class="step"><div class="badge">4</div><div><strong>Block B — ~1 hr Neon Rift</strong><p>Parallel code + art; Kyle / Dragoon / Cesar at desks; review pins; lighter Tony on mic, not lighter on chat.</p></div></div>
+            <div class="step"><div class="badge">5</div><div><strong>Block C</strong><p>Sync build vs art; more Makko + SS co-work; retro; “nothing shipped on stream” is OK.</p></div></div>
+            <div class="step"><div class="badge">6</div><div><strong>Outro</strong><p>Makko signup, wishlists, Discord, giveaway, next week’s theme line.</p></div></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Replay (embed after live)</h2>
+          <p class="muted">Drop the canonical replay URL (usually YouTube) once the VOD exists.</p>
+          <iframe height="360" src="about:blank" title="Replay placeholder"></iframe>
+        </section>
+
+        <section class="card">
+          <h2>FAQ</h2>
+          <div class="faq">
+            <h4>What is the Makko Week 01 livestream?</h4>
+            <p>A ~3 hour collaborative build stream: Makko tooling, Sector Scavengers, and Neon Rift, with a one-hour flagship segment and Discord-driven Q&A.</p>
+          </div>
+          <div class="faq">
+            <h4>Do I need to watch all three hours?</h4>
+            <p>No. Use chapters or the digest above; the flagship hour is the densest game-design block.</p>
+          </div>
+          <div class="faq">
+            <h4>How do I ask a question?</h4>
+            <p>Tag <strong>J</strong> (Jeremy), <strong>T</strong> (Tony), <strong>B</strong> (Brandon), or <strong>C</strong> (Cesar art) in chat; Discord questions collected during the week may be read at the open and check-ins.</p>
+          </div>
+          <div class="faq">
+            <h4>Where is the contest and office hours?</h4>
+            <p>Join Discord — on-stream lower thirds and Dragoon segments repeat how to enter and deadlines. Replace this sentence with your official rules link.</p>
+          </div>
+        </section>
+
+        <section class="cta-strip">
+          <div>
+            <h3 style="margin:0;">Build games on Makko</h3>
+            <div class="muted">Same workflow the team uses on stream — art, code, and playable iteration.</div>
+          </div>
+          <div>
+            <a class="btn" href="#">See pricing</a>
+            <a class="btn primary" href="#">Start on Makko</a>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <section class="card">
+          <h2>Discord &amp; contest</h2>
+          <div class="discord-row">
+            <img src="./assets/cta-join-discord.svg" alt="Join Discord" />
+            <div>
+              <p style="margin:0 0 8px;"><strong>Office hours</strong> + weekly giveaway <strong>(game TBD)</strong>.</p>
+              <a class="btn primary" href="#" style="margin-left:0;">Discord invite</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Chapter targets (fill from VOD)</h2>
+          <div class="chapter-row"><span>0:00</span><span>Cold open + Discord queue</span></div>
+          <div class="chapter-row"><span>~0:10</span><span>Roadmap triad</span></div>
+          <div class="chapter-row"><span>~0:32</span><span>Block A start</span></div>
+          <div class="chapter-row"><span>~1:27</span><span>Neon Rift flagship</span></div>
+          <div class="chapter-row"><span>~2:30</span><span>Block C sync</span></div>
+          <div class="chapter-row"><span>~2:51</span><span>Outro</span></div>
+        </section>
+
+        <section class="card">
+          <h2>Internal links</h2>
+          <ul>
+            <li><a style="color:#9ec5ff;" href="#">/art-studio</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/animation</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/code-studio</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/pricing</a></li>
+          </ul>
+          <p class="muted" style="margin-top:12px;margin-bottom:0;">Producer doc: <code>Makko_Weekly_Livestream_Run_Of_Show.md</code> → Episode 001.</p>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

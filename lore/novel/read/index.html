@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>The Crossing License, Book 1 | Rift Runners</title>
+<meta name="description" content="Read The Crossing License (Rift Runners, Book 1): mobile-friendly prose reader generated from the same manuscript as the comic view.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --ink: #e6e8ee;
+    --muted: #98a0ad;
+    --accent: #3b8edf;
+    --rule: #1c2230;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    margin: 0;
+    font-family: "Lora", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  .read-shell {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 5rem;
+  }
+  .read-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-top a { color: var(--accent); text-decoration: none; }
+  .read-site {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.1rem;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.22);
+  }
+  .read-site a { color: var(--accent); text-decoration: none; }
+  .read-site a:hover { text-decoration: underline; }
+  .read-eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .read-title {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 1.4rem + 2vw, 2.4rem);
+    line-height: 1.1;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .read-lede {
+    color: var(--muted);
+    max-width: 32rem;
+    margin: 0 0 2rem;
+  }
+  .toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .toc__link {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 0.25rem 0.85rem;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 0.85rem 0.95rem;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+  }
+  .toc__link:hover { border-color: var(--accent); }
+  .toc__no {
+    grid-row: 1 / span 2;
+    align-self: center;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .toc__title {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .toc__teaser {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    .read-shell { padding: 1rem 1rem 4rem; }
+    .toc__link { grid-template-columns: 3.4rem 1fr; padding: 0.75rem 0.85rem; }
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #fbf9f4;
+      --ink: #1d2330;
+      --muted: #5a6473;
+      --accent: #1f6dc0;
+      --rule: #e3ddd0;
+    }
+  }
+</style>
+</head>
+<body>
+  <nav class="read-site" aria-label="Rift Runners site">
+    <a href="/showcase/index.html">Weekly drops</a>
+    <a href="/lore/novel/index.html">Graphic novel (comic)</a>
+    <a href="/">Dev hub</a>
+  </nav>
+  <main class="read-shell">
+    <nav class="read-top" aria-label="Site navigation">
+      <a href="/">&larr; Home</a>
+      <span>Reader View</span>
+    </nav>
+    <p class="read-eyebrow">Rift Runners</p>
+    <h1 class="read-title">The Crossing License, Book 1</h1>
+    <p class="read-lede">Prose from <code>rift-runners/novel</code>. Tap a part to start. Static HTML, no app, no account. Built next to the comic strip view.</p>
+    <ol class="toc">
+
+      <li class="toc__item">
+        <a class="toc__link" href="ch00.html">
+          <span class="toc__no">Prologue</span>
+          <span class="toc__title">Prologue</span>
+          <span class="toc__teaser">Kade and Katelyn crossed the catwalk at a run, boots ringing wet metal while the rift pulsed ahead like a torn vein in the night.</span>
+        </a>
+      </li>
+      <li class="toc__item">
+        <a class="toc__link" href="ch01.html">
+          <span class="toc__no">Ch 1</span>
+          <span class="toc__title">Honest Clock</span>
+          <span class="toc__teaser">Port Grey hit Kade like a hand on the chest—noise first, then cold rain, then the smell of fried oil and ozone.</span>
+        </a>
+      </li>
+    </ol>
+  </main>
+</body>
+</html>

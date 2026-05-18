@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="Port Grey hit Kade like a hand on the chest—noise first, then cold rain, then the smell of fried oil and ozone.">
+<title>Chapter 1: Honest Clock | Rift Runners, Book 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --ink: #e6e8ee;
+    --muted: #98a0ad;
+    --accent: #3b8edf;
+    --rule: #1c2230;
+    --hud-bg: #11151d;
+    --hud-ink: #c7e0ff;
+    --hud-border: #1f2a3a;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    margin: 0;
+    font-family: "Lora", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+  .read-shell {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 5rem;
+  }
+  .read-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-top a { color: var(--accent); text-decoration: none; }
+  .read-top a:hover { text-decoration: underline; }
+  .read-site {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.1rem;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.22);
+  }
+  .read-site a { color: var(--accent); text-decoration: none; }
+  .read-site a:hover { text-decoration: underline; }
+  .read-eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .read-title {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.2rem);
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .read-prose p {
+    margin: 0 0 1.15em;
+  }
+  .read-prose strong { color: #fff; }
+  .read-prose em { color: #f0c8ff; font-style: italic; }
+  .read-prose code,
+  .read-prose .read-hud {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.86em;
+    color: var(--hud-ink);
+  }
+  .read-prose code {
+    background: var(--hud-bg);
+    border: 1px solid var(--hud-border);
+    border-radius: 4px;
+    padding: 0.05em 0.35em;
+  }
+  .read-prose pre.read-hud {
+    background: var(--hud-bg);
+    border: 1px solid var(--hud-border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    line-height: 1.5;
+    font-size: 0.85em;
+  }
+  .read-prose pre.read-hud code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .read-prose hr.read-rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 2.25rem auto;
+    width: 4rem;
+  }
+  .read-panel {
+    margin: 1.75rem -0.5rem;
+    text-align: center;
+  }
+  .read-panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    background: #000;
+  }
+  .read-panel figcaption {
+    margin-top: 0.45rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+  }
+  .read-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    background: rgba(255,255,255,0.02);
+  }
+  .read-nav__link:hover { border-color: var(--accent); }
+  .read-nav__link--next { text-align: right; align-items: flex-end; }
+  .read-nav__link--disabled { color: var(--muted); opacity: 0.55; }
+  .read-nav__arrow { color: var(--accent); font-size: 0.95rem; }
+  .read-nav__chapno {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-nav__title {
+    font-family: "Lora", Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    .read-shell { padding: 1rem 1rem 4rem; }
+    .read-nav { grid-template-columns: 1fr; }
+    .read-nav__link--next { text-align: left; align-items: flex-start; }
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #fbf9f4;
+      --ink: #1d2330;
+      --muted: #5a6473;
+      --accent: #1f6dc0;
+      --rule: #e3ddd0;
+      --hud-bg: #f3eee2;
+      --hud-ink: #1b2a45;
+      --hud-border: #d9d0b9;
+    }
+    .read-prose strong { color: #000; }
+    .read-prose em { color: #6a2390; }
+  }
+</style>
+</head>
+<body>
+  <nav class="read-site" aria-label="Rift Runners site">
+    <a href="/showcase/index.html">Weekly drops</a>
+    <a href="/lore/novel/index.html">Graphic novel (comic)</a>
+    <a href="/">Dev hub</a>
+  </nav>
+  <main class="read-shell">
+    <nav class="read-top" aria-label="Reader navigation">
+      <a href="index.html">&larr; Chapters</a>
+      <span>Chapter 1 · 2 parts</span>
+    </nav>
+    <p class="read-eyebrow">The Crossing License · Book 1 · Chapter 1</p>
+    <h1 class="read-title">Honest Clock</h1>
+    <article class="read-prose">
+<p>Port Grey hit Kade like a hand on the chest—noise first, then cold rain, then the smell of fried oil and ozone.</p>
+<p>His courier band had stopped itching.</p>
+<p>That was worse.</p>
+<p>Itch meant nerves still worked. Now the band sat on his skin like a clock that had learned a language he never agreed to speak.</p>
+<pre class="read-hud"><code>[MIRE // RECONCILE COMPLETE]
+Crossing license: ACTIVE (PROVISIONAL)
+Binding clause: LOCAL HEAT REQUIRED WITHIN 36:00:00 (HONEST)
+Failure mode: FORFEIT + SILENCE (72:00:00)
+Next vector: EARTH // PORT GREY // PIER 7 (CLASS 1)
+Mode: NONCONTACT
+Reminder: violence corrodes claim. be clever.</code></pre>
+<p>Kade read <strong>be clever</strong> off a shutter tag as he cut through a night-market alley. Someone had painted it like a dare.</p>
+<p>The street vector had already started without asking him if he was sentimental.</p>
+<p>MIRE painted the course in layers only his band could parse cleanly: a <strong>true line</strong> along cracked asphalt, false cousins on the wet brick beside it, a rotating kiosk that showed three door icons and only one real door when the cycle hit <strong>honest</strong>.</p>
+<p>Kade ran the true line.</p>
+<p>A vendor’s awning tried to become a wall for one beat. He ducked early. The band liked early.</p>
+<p><strong>TOLERANCE OK</strong> flashed. He hated that it felt like praise.</p>
+<p>At the next junction, two alleys looked identical until you noticed the gutter grate: one had a hairline seam of wrong light. The Rift’s fingerprint. He took that alley.</p>
+<p>Gravity tilted on the third step. Not enough to fall. Enough to remind him his body was borrowed.</p>
+<p>His band counted honest seconds in the corner of his vision. No discounts.</p>
+<p>Footsteps behind him matched his cadence without copying it. Not quiet. Sure.</p>
+<p>“Orin,” a woman said. Her voice carried over rain and drone rotors like it had priority routing.</p>
+<p>Kade did not spin. Spinning made you a volunteer.</p>
+<p>He slid sideways behind a stalled cargo bot and came up with his hands visible.</p>
+<p>She stood under a dead halo-sign, coat dark with rain. Her courier band rode high on her wrist. The glyphs moved like they belonged to someone whose debts still had good manners.</p>
+<p>“Kade,” he said. Names were currency.</p>
+<p>“You have been filed,” she said. “Silk Meridian does not chase people. We chase <strong>windows</strong>. You are a window today.”</p>
+<p>“I did not sign up for a window.”</p>
+<p>“You signed up for a license,” she said. “Same shape. Different word.”</p>
+<pre class="read-hud"><code>[MIRE // HEAT OPEN]
+Bench witness: SILK MERIDIAN (ADJUSTER PRESENT)
+Earth local: PROVISIONAL (WUH 1)
+Heat goal: FIRST ARRIVAL + CLEAN SEAL (CLASS 1)
+Clock: HONEST
+Corrosion on contact: +12% (CUMULATIVE)</code></pre>
+<p>The glyphs on his band tightened. Not pain. Pressure.</p>
+<p>She did not draw a weapon.</p>
+<p>She smiled like she had memorized the rules on purpose.</p>
+<p>“We run the same vector,” she said. “Noncontact. If you touch me, you pay. If I touch you, I pay. If you <strong>lose</strong>, you do not die. You inherit a nicer leash.”</p>
+<p>Kade’s mouth went dry anyway.</p>
+<p>“What is the seal?” he asked.</p>
+<p>She pointed down the street—past kiosks, past a knot of protesters taped off by hazard ribbon—toward the old pier head where the city opened its throat to the sea.</p>
+<p>“The Bench terminal,” she said. “First hand on the keystone with a clean lattice earns the seal. The city is the puzzle. The lattice is the argument. The keystone is the signature.”</p>
+<p>The course tightened into a staircase puzzle: fire escapes offered three climbs. Two glowed too eager. One waited.</p>
+<p>Kade took the patient climb.</p>
+<p>Halfway up, the lattice overlay made a whole landing go translucent for one beat. He pushed off early and caught the next rail with his palm. No rope. No rail except what the rules pretended counted.</p>
+<p>Below, the street looked like a map somebody had folded wrong. Wrong-angle light leaked through a seam where two buildings did not quite agree on geometry.</p>
+<p>She moved on a parallel line—rooftop lip to rooftop lip—her own branch, her own traps.</p>
+<p>She was not an enemy in the old sense.</p>
+<p>She was competition. She could beat him by being <strong>correct</strong> faster.</p>
+<p>At the next corner, three false nodes pulsed on a traffic mast. One true node waited, almost shy.</p>
+<p>Kade stopped trying to look clever. He tried to look <strong>accurate</strong>.</p>
+<p>He traced the true path with his eyes first. The band approved. The corrosion counter did not move.</p>
+<p>She hissed once—not at him, at her own puzzle. A false node had almost taken her. She recovered clean. She would be fast at the end.</p>
+<p>The pier head opened into wind and spray. The Bench arch rose like a gate somebody had built after the fact to pretend the law had always been there.</p>
+<p>Two routes converged on the last span. One step wide. Room for one hand if nobody got greedy.</p>
+<p>Kade hit the last span early. Let momentum carry him into an ugly slide. His palm slapped the keystone slot.</p>
+<p>His band lit with silent text:</p>
+<pre class="read-hud"><code>[SEAL // ACCEPTED]
+FIRST ARRIVAL: KADE ORIN
+CLEAN LATTICE: YES
+CORROSION: 0%</code></pre>
+<p>Behind him, her hand stopped in the air. Close enough to feel heat. Not close enough to be contact. The rule caught her wrist like a wire.</p>
+<p>She did not look angry.</p>
+<p>She looked <strong>interested</strong>.</p>
+<p>“Well filed,” she said.</p>
+<p>Kade’s relief died when the next line printed.</p>
+<pre class="read-hud"><code>[MIRE // CLAUSE ATTACH]
+New counterparty detected on license
+Name: SILK MERIDIAN (LIENHOLDER, CLASS B)
+Discharge options: PERFORMANCE (1) / PURCHASE (UNAVAILABLE)
+Next heat: AUTOMATIC IF UNRESOLVED (24:00:00)</code></pre>
+<p>Kade stared at <strong>lienholder</strong>.</p>
+<p>Her smile softened. Almost kind. “Noncontact does not mean nobody wins,” she said. “It means nobody bleeds. You still lost something.”</p>
+<p>“I won arrival,” Kade said.</p>
+<p>“You did,” she said. “And now we own a piece of your route until you buy it back or run it clean again. That is the game.”</p>
+<p>Rain kept falling. The city kept pretending that was neutral.</p>
+<p>His band started a new clock.</p>
+<p>Honest time again.</p>
+<p>He breathed slow. Panic made you clumsy. Clumsy counted.</p>
+<p>“Fine,” he said—to MIRE, to the vector still painted under his boots, to the part of Earth that had started keeping receipts it could not pay. “File me.”</p>
+<p>The pier answered with wind that felt like a yes.</p>
+<p>Kade walked back into Port Grey’s streets with a clean seal on his record and a new name printed on his leash.</p>
+<p>He did not know yet which one weighed more.</p>
+    </article>
+    <nav class="read-nav" aria-label="Chapter navigation">
+      <a class="read-nav__link read-nav__link--prev" href="ch00.html"><span class="read-nav__arrow">&larr;</span> <span class="read-nav__chapno">Prologue</span> <span class="read-nav__title">Prologue</span></a>
+      <span class="read-nav__link read-nav__link--disabled">End of Book 1</span>
+    </nav>
+  </main>
+</body>
+</html>

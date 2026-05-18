@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="Kade and Katelyn crossed the catwalk at a run, boots ringing wet metal while the rift pulsed ahead like a torn vein in the night.">
+<title>Prologue: Prologue | Rift Runners, Book 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --ink: #e6e8ee;
+    --muted: #98a0ad;
+    --accent: #3b8edf;
+    --rule: #1c2230;
+    --hud-bg: #11151d;
+    --hud-ink: #c7e0ff;
+    --hud-border: #1f2a3a;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    margin: 0;
+    font-family: "Lora", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+  .read-shell {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 5rem;
+  }
+  .read-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-top a { color: var(--accent); text-decoration: none; }
+  .read-top a:hover { text-decoration: underline; }
+  .read-site {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.1rem;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.22);
+  }
+  .read-site a { color: var(--accent); text-decoration: none; }
+  .read-site a:hover { text-decoration: underline; }
+  .read-eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .read-title {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.2rem);
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .read-prose p {
+    margin: 0 0 1.15em;
+  }
+  .read-prose strong { color: #fff; }
+  .read-prose em { color: #f0c8ff; font-style: italic; }
+  .read-prose code,
+  .read-prose .read-hud {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.86em;
+    color: var(--hud-ink);
+  }
+  .read-prose code {
+    background: var(--hud-bg);
+    border: 1px solid var(--hud-border);
+    border-radius: 4px;
+    padding: 0.05em 0.35em;
+  }
+  .read-prose pre.read-hud {
+    background: var(--hud-bg);
+    border: 1px solid var(--hud-border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    line-height: 1.5;
+    font-size: 0.85em;
+  }
+  .read-prose pre.read-hud code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .read-prose hr.read-rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 2.25rem auto;
+    width: 4rem;
+  }
+  .read-panel {
+    margin: 1.75rem -0.5rem;
+    text-align: center;
+  }
+  .read-panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    background: #000;
+  }
+  .read-panel figcaption {
+    margin-top: 0.45rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+  }
+  .read-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    background: rgba(255,255,255,0.02);
+  }
+  .read-nav__link:hover { border-color: var(--accent); }
+  .read-nav__link--next { text-align: right; align-items: flex-end; }
+  .read-nav__link--disabled { color: var(--muted); opacity: 0.55; }
+  .read-nav__arrow { color: var(--accent); font-size: 0.95rem; }
+  .read-nav__chapno {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .read-nav__title {
+    font-family: "Lora", Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    .read-shell { padding: 1rem 1rem 4rem; }
+    .read-nav { grid-template-columns: 1fr; }
+    .read-nav__link--next { text-align: left; align-items: flex-start; }
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #fbf9f4;
+      --ink: #1d2330;
+      --muted: #5a6473;
+      --accent: #1f6dc0;
+      --rule: #e3ddd0;
+      --hud-bg: #f3eee2;
+      --hud-ink: #1b2a45;
+      --hud-border: #d9d0b9;
+    }
+    .read-prose strong { color: #000; }
+    .read-prose em { color: #6a2390; }
+  }
+</style>
+</head>
+<body>
+  <nav class="read-site" aria-label="Rift Runners site">
+    <a href="/showcase/index.html">Weekly drops</a>
+    <a href="/lore/novel/index.html">Graphic novel (comic)</a>
+    <a href="/">Dev hub</a>
+  </nav>
+  <main class="read-shell">
+    <nav class="read-top" aria-label="Reader navigation">
+      <a href="index.html">&larr; Chapters</a>
+      <span>Prologue · 2 parts</span>
+    </nav>
+    <p class="read-eyebrow">The Crossing License · Book 1 · Prologue</p>
+    <h1 class="read-title">Prologue</h1>
+    <article class="read-prose">
+<p>Kade and Katelyn crossed the catwalk at a run, boots ringing wet metal while the rift pulsed ahead like a torn vein in the night.</p>
+<p>Kade still heard Katelyn’s rule every time a contract clock started.</p>
+<p><strong>Do the map first. Move second. Panic last.</strong></p>
+<p>The contract read simple on paper: close a Class-1 spill at Pier 7 before it widened into shipping lanes.</p>
+<p>Simple paid less than desperate. It also lied better.</p>
+<p>Katelyn was not old, but she had veteran patience: dark braid tucked under a dented runner hood, burn scar at the jaw, courier band wrapped in black tape where she'd cracked the glass twice and refused to replace it.</p>
+<p>“Contract says six locks,” she said. “So the system buried the seventh.”</p>
+<p>“You calling scam?”</p>
+<p>“I’m calling Port Grey.”</p>
+<p>The rift control plate sat in a spill of rain and blue static, puzzle nodes spinning in two contradictory grids.</p>
+<pre class="read-hud"><code>[CONTRACT // CLOSURE STACK]
+Objective: SEAL BREACH VECTOR P7-11
+Solve keystone sequence to arm anchor ring.
+Failure state: uncontrolled expansion event.</code></pre>
+<p>Kade dropped to one knee at the plate. Katelyn took watch with a coil rifle she only carried to scare scav drones, not people.</p>
+<p>Node one accepted his touch.</p>
+<p>Node two lied.</p>
+<p>The true line crawled left while its reflection crawled right. He picked right. The plate buzzed rejection hard enough to numb his glove.</p>
+<p>Katelyn pivoted back toward him. “Stop chasing speed. Read the rhythm.”</p>
+<p>He reset.</p>
+<p>Above them, gantry alarms shifted from amber to red.</p>
+<p>“Clock changed,” Kade said.</p>
+<p>“No,” Katelyn said. “Clock got honest.”</p>
+<p>He found the third node by feel, not sight: a dead corner that only lit after a five-count pause. Then the fourth. Then the fifth.</p>
+<p>The sixth split into nine.</p>
+<p>Rain hammered louder. The rift widened a handspan.</p>
+<p>“There’s your hidden lock,” Katelyn said, voice flat now. “Keystone pair. Pick the wrong twin and it eats the anchor.”</p>
+<p>Kade’s band stuttered against his skin, glyphs flipping too fast to parse.</p>
+<p>He guessed.</p>
+<p>The ring fired wrong.</p>
+<p>The anchor pylons around the causeway snapped from blue to ultraviolet, then blew outward like sparks from a grinder wheel. The catwalk lurched under them.</p>
+<p>Katelyn moved before he finished cursing.</p>
+<p>She hit his shoulder, drove him behind the plate housing, and took the backlash herself when the rift mouth inverted.</p>
+<p>There was no cinematic scream. Just a sharp inhale and her name half-formed in his throat.</p>
+<p>Then she was there and not there, body pulled thin by blue-black shear until the light folded and swallowed her.</p>
+<p>Kade slammed both palms into the emergency deadman and forced a local collapse pulse.</p>
+<p>The pulse sealed the outer edge.</p>
+<p>It did not give her back.</p>
+<p>What remained on the deck was her taped courier band and a contract that now listed one runner status as <strong>UNRESOLVED ASSET</strong>.</p>
+<pre class="read-hud"><code>[CONTRACT // INCIDENT REVISION]
+Primary closer: Kade Orin
+Secondary closer: Katelyn Voss
+Secondary status: LOST DURING CONTAINMENT
+Liability transfer: PENDING REVIEW</code></pre>
+<p>By dawn, cleanup drones had already painted over the scorch marks.</p>
+<p>By noon, MIRE had converted grief into paperwork.</p>
+<p>By evening, Kade had signed three receipts he did not understand and one debt line he definitely did.</p>
+<p>He did not remember boarding the shuttle back into Port Grey. He remembered stepping off it.</p>
+<p>Kade did not want another minute inside the hull.</p>
+<p>Dock control chirped once.</p>
+<p>“Runner Orin,” the voice said. Flat. Tired. “State intent.”</p>
+<p>“Finish the contract,” Kade said. “Find where she went.”</p>
+<p>Silence. Then: “Intent logged.”</p>
+<p>The mag line released with a soft snap. The hatch cycled. Air hit him—recycled dock air first, then a colder ribbon that meant <strong>outside</strong>.</p>
+<p>His courier band pulsed with Katelyn’s last unreadable glyph.</p>
+<p>He hit wet pavement running.</p>
+    </article>
+    <nav class="read-nav" aria-label="Chapter navigation">
+      <span class="read-nav__link read-nav__link--disabled">Beginning</span>
+      <a class="read-nav__link read-nav__link--next" href="ch01.html"><span class="read-nav__chapno">Ch 1</span> <span class="read-nav__title">Honest Clock</span> <span class="read-nav__arrow">&rarr;</span></a>
+    </nav>
+  </main>
+</body>
+</html>

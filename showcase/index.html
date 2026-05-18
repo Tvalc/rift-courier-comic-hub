@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rift Runners — weekly drops hub and links to the web graphic novel." />
+  <title>Rift Runners · Weekly drops hub</title>
+  <style>
+    :root {
+      --bg: #080e1a;
+      --card: #152338;
+      --text: #e8f1ff;
+      --muted: #9cb2cf;
+      --accent: #3b8edf;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", Roboto, system-ui, sans-serif;
+      color: var(--text);
+      background: radial-gradient(900px 420px at 70% -5%, rgba(59, 142, 223, 0.22), transparent 55%),
+        linear-gradient(145deg, var(--bg) 0%, #111c2e 45%, #1a2d48 100%);
+      line-height: 1.5;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    h1 { font-size: clamp(1.5rem, 4vw, 2rem); margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+    p.lead { color: var(--muted); margin: 0 0 2rem; font-size: 1.05rem; }
+    nav.site { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    nav.site a {
+      display: inline-block;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    nav.site a:hover { border-color: var(--accent); color: #fff; }
+    nav.site a.primary { background: rgba(59, 142, 223, 0.25); border-color: rgba(59, 142, 223, 0.45); }
+    ul.cards { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    ul.cards a {
+      display: block;
+      padding: 1rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+    }
+    ul.cards a:hover { border-color: var(--accent); }
+    ul.cards strong { display: block; font-size: 1.05rem; margin-bottom: 0.25rem; }
+    ul.cards span { font-size: 0.9rem; color: var(--muted); }
+    p.note { margin-top: 2rem; font-size: 0.82rem; color: var(--muted); }
+    code { font-size: 0.88em; background: rgba(0, 0, 0, 0.35); padding: 0.12em 0.35em; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="site" aria-label="Rift Runners site">
+      <a class="primary" href="/showcase/index.html" aria-current="page">Weekly drops</a>
+      <a href="/lore/novel/index.html">Graphic novel</a>
+      <a href="/">Dev hub</a>
+    </nav>
+    <h1>Rift Runners — weekly drops</h1>
+    <p class="lead">Weekly live podcast devlog and marketing pages. Start with the <strong>chronological build diary</strong>. The <strong>graphic novel</strong> lives under <code>/lore/novel/</code> when you run the unified preview from <code>rift-runners-website</code>.</p>
+    <ul class="cards">
+      <li>
+        <a href="pixel-art-concept-gallery.html">
+          <strong>Weekly live build devlog</strong>
+          <span>Chronological podcast build — videos, comic panels, episode flow.</span>
+        </a>
+      </li>
+      <li>
+        <a href="showcase-weekly-update-example.html">
+          <strong>Weekly update (visual-first)</strong>
+          <span>“What shipped” template with large art blocks.</span>
+        </a>
+      </li>
+      <li>
+        <a href="showcase-week-01-livestream-hub.html">
+          <strong>Livestream week hub</strong>
+          <span>Episode schedule and roles (Makko week 01 example).</span>
+        </a>
+      </li>
+    </ul>
+    <p class="note">Preview both halves together: from repo root, <code>cd rift-runners-website</code> then <code>npm run preview:rr</code> — opens this hub at <code>/showcase/</code> and the novel at <code>/lore/novel/</code>.</p>
+  </div>
+</body>
+</html>

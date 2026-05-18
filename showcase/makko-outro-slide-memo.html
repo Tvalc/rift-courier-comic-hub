@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makko — Weekly stream outro (memo)</title>
+  <!-- OBS: Browser source 1920×1080. Append ?vertical for 9:16 story safe layout. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --mk-dark-gray: #080e1a;
+      --mk-dark-blue: #152338;
+      --mk-medium-blue: #1a2d48;
+      --mk-panel: #111c2e;
+      --mk-accent: #3b8edf;
+      --mk-text: #ffffff;
+      --mk-text-70: rgba(255, 255, 255, 0.7);
+      --mk-hairline: rgba(255, 255, 255, 0.09);
+      --mk-stripe: 4px solid var(--mk-accent);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--mk-dark-gray);
+      font-family: Inter, Segoe UI, system-ui, sans-serif;
+      color: var(--mk-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Marketing gradient — Brand Bible §7 / video backgrounds */
+    body {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: clamp(12px, 2vw, 28px);
+      background: linear-gradient(135deg, var(--mk-dark-gray) 0%, var(--mk-dark-blue) 45%, var(--mk-medium-blue) 100%);
+    }
+
+    /* 16:9 stream outro (default) | ?vertical = 9:16 */
+    .stage {
+      width: min(1920px, 100vw);
+      aspect-ratio: 16 / 9;
+      max-height: min(1080px, 100vh);
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    body.vertical .stage {
+      width: min(1080px, 100vw);
+      aspect-ratio: 9 / 16;
+      max-height: min(1920px, 100vh);
+    }
+
+    /* “Memo” panel — dark slide master + panel (Bible: #080e1a bg, #152338 blocks) */
+    .memo {
+      width: 88%;
+      max-width: 1240px;
+      background: var(--mk-panel);
+      border: 1px solid var(--mk-hairline);
+      border-radius: 12px;
+      padding: clamp(20px, 2.2vw, 36px) clamp(22px, 2.5vw, 40px);
+      position: relative;
+      box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    body.vertical .memo {
+      width: 78%;
+      max-width: 820px;
+    }
+
+    /* Accent stripe — lower-third rule adapted to memo plate edge */
+    .memo::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 4px;
+      background: var(--mk-accent);
+      border-radius: 2px 0 0 2px;
+    }
+
+    /* Paperclip — subtle tactile nod to inspiration, monochrome */
+    .paperclip {
+      position: absolute;
+      top: -6px;
+      left: 28px;
+      width: 36px;
+      height: 48px;
+      opacity: 0.55;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    }
+
+    .paperclip svg { width: 100%; height: 100%; }
+
+    .stamp {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: var(--mk-dark-blue);
+      border: 1px solid var(--mk-hairline);
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--mk-text-70);
+      border-radius: 4px;
+    }
+
+    .memo-header {
+      text-align: center;
+      margin-bottom: clamp(14px, 2vw, 22px);
+      padding-top: 8px;
+    }
+
+    .memo-label {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--mk-text);
+    }
+
+    .memo-underline {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .memo-underline span {
+      height: 3px;
+      width: min(120px, 18vw);
+      background: var(--mk-accent);
+      border-radius: 2px;
+      opacity: 0.85;
+    }
+
+    .meta-lines {
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--mk-text-70);
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .title-script {
+      font-family: "Caveat", Inter, cursive;
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 700;
+      color: #dce9ff;
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: clamp(16px, 2vw, 24px);
+      text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+    }
+
+    .title-script .motion {
+      color: var(--mk-accent);
+      font-size: 1.15em;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 1.5vw, 18px);
+      margin-bottom: clamp(12px, 1.5vw, 18px);
+    }
+
+    body.vertical .grid-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .block {
+      border: 1px solid var(--mk-hairline);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(8, 14, 26, 0.35);
+    }
+
+    .block-tab {
+      background: var(--mk-medium-blue);
+      padding: 8px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mk-text);
+      border-bottom: 1px solid var(--mk-hairline);
+    }
+
+    .block-body {
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    body.vertical .block-body {
+      grid-template-columns: 1fr;
+    }
+
+    .cal-line {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .cal-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(59, 142, 223, 0.18);
+      border: 1px solid rgba(59, 142, 223, 0.35);
+      display: grid;
+      place-items: center;
+    }
+
+    .cal-icon svg { width: 20px; height: 20px; fill: var(--mk-accent); }
+
+    .block-body strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--mk-text);
+    }
+
+    .block-body p, .block-body .muted {
+      font-size: 13px;
+      color: var(--mk-text-70);
+      line-height: 1.45;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .social-row span { font-size: 11px; color: var(--mk-text-70); width: 100%; }
+
+    .social-row a {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--mk-hairline);
+      background: var(--mk-dark-blue);
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .social-row a:hover {
+      border-color: rgba(59, 142, 223, 0.45);
+      background: rgba(59, 142, 223, 0.12);
+    }
+
+    .social-row svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.88); }
+
+    .questions-box {
+      border: 1px solid var(--mk-hairline);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: clamp(12px, 1.5vw, 18px);
+      background: rgba(21, 35, 56, 0.55);
+    }
+
+    .questions-box p {
+      font-size: 13px;
+      color: var(--mk-text-70);
+      flex: 1;
+    }
+
+    .questions-box code {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      color: #b8d9ff;
+      background: rgba(0,0,0,0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .bubble {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--mk-accent);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--mk-accent);
+      background: rgba(59, 142, 223, 0.1);
+    }
+
+    .challenge {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid var(--mk-hairline);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(8, 14, 26, 0.4);
+    }
+
+    body.vertical .challenge {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .challenge-copy h3 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      color: var(--mk-text);
+    }
+
+    .challenge-copy p { font-size: 13px; color: var(--mk-text-70); margin-bottom: 6px; }
+
+    .challenge-copy .faded {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Polaroid-style prize frame — tactile nod, dark interior */
+    .polaroid {
+      width: min(200px, 28vw);
+      padding: 10px 10px 28px;
+      background: #e8ecf2;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      transform: rotate(-2deg);
+      position: relative;
+    }
+
+    body.vertical .polaroid {
+      width: min(220px, 55vw);
+    }
+
+    .polaroid::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: 18px;
+      width: 44px;
+      height: 22px;
+      background: linear-gradient(180deg, rgba(210, 180, 140, 0.55), rgba(180, 150, 110, 0.35));
+      border-radius: 2px;
+      opacity: 0.9;
+      transform: rotate(6deg);
+      pointer-events: none;
+    }
+
+    .polaroid .photo {
+      aspect-ratio: 1;
+      background: linear-gradient(145deg, #1a2538, #0d1524);
+      border-radius: 2px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .polaroid .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .polaroid .photo .ph {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mk-text-70);
+      text-align: center;
+      padding: 8px;
+    }
+
+    .footer-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: clamp(16px, 2vw, 22px);
+      font-family: "Caveat", cursive;
+      font-size: clamp(22px, 2.8vw, 32px);
+      font-weight: 700;
+      color: #dce9ff;
+    }
+
+    .footer-line .star {
+      color: var(--mk-accent);
+      font-size: 1.2em;
+      line-height: 1;
+    }
+
+    .brand-lockup {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--mk-text-70);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--mk-accent);
+      color: var(--mk-text);
+      border-color: rgba(59, 142, 223, 0.75);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .block-body { grid-template-columns: 1fr; }
+      .challenge { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <article class="memo" aria-label="Weekly stream and office hours outro">
+      <div class="paperclip" aria-hidden="true">
+        <svg viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8c-4 0-7 3-7 7v28c0 8 6 14 14 14s14-6 14-14V18" stroke="rgba(255,255,255,0.35)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M19 18v25c0 4.5-3.5 8-8 8" stroke="rgba(255,255,255,0.25)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="stamp">See you there</div>
+
+      <header class="memo-header">
+        <div class="memo-label">MEMO</div>
+        <div class="memo-underline" aria-hidden="true"><span></span><span></span></div>
+      </header>
+
+      <div class="meta-lines">
+        <div><strong style="color: rgba(255,255,255,0.85);">TO:</strong> Community</div>
+        <div><strong style="color: rgba(255,255,255,0.85);">RE:</strong> Weekly stream &amp; office hours</div>
+        <div><strong style="color: rgba(255,255,255,0.85);">DATE:</strong> May 11, 2026</div>
+      </div>
+
+      <h1 class="title-script"><span class="motion">~</span> Weekly stream <span class="motion">&amp;</span> office hours <span class="motion">~</span></h1>
+
+      <div class="grid-2">
+        <section class="block">
+          <div class="block-tab">Streams</div>
+          <div class="block-body">
+            <div class="cal-line">
+              <div class="cal-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 2v2M17 2v2M4 7h16M5 9v10a2 2 0 002 2h10a2 2 0 002-2V9"/></svg>
+              </div>
+              <div>
+                <strong>Going live</strong>
+                <p><span id="stream-datetime">May 13, 2026 · 1:00 PM PST</span></p>
+                <p class="muted" style="margin-top:6px;">Human-in-the-loop build session — exploration, not a packaged guarantee.</p>
+              </div>
+            </div>
+            <div>
+              <strong>Streaming on</strong>
+              <div class="social-row">
+                <span>All links → official link hub</span>
+                <a href="#" title="TikTok" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14.5 4.5h3.4v3.4a5.5 5.5 0 01-5.5 5.5v5.1a8.3 8.3 0 01-8.3-8.3h3.4a4.9 4.9 0 004.9 4.9V4.5z"/></svg></a>
+                <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v3H7v3h3v7h4v-7h3.2l.3-3H14v-1.5c0-.8.2-1.3 1.3-1.3H17V9h-3z"/></svg></a>
+                <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M8 3h8a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5zm0 2.5A2.5 2.5 0 005.5 8v8A2.5 2.5 0 008 18.5h8a2.5 2.5 0 002.5-2.5V8A2.5 2.5 0 0016 5.5H8zm4 2.3a4.7 4.7 0 110 9.4 4.7 4.7 0 010-9.4zm5.2-4.5a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2z"/></svg></a>
+                <a href="#" title="X" aria-label="X"><svg viewBox="0 0 24 24"><path d="M4 4h3.5l4.4 6L16.5 20H13l-4.6-6.4L5.2 20H4l5.8-8L4 4zm12.6 0h2.4l-5.3 7.1L19.4 20h-2.7l-4.3-5.8L8.4 20H6l5.6-7.4L6 4h2.5l3.8 5.1L16.6 4z"/></svg></a>
+                <a href="#" title="Twitch" aria-label="Twitch"><svg viewBox="0 0 24 24"><path d="M6 3h12v10l-3 3h-3l-2 2v-2H6V3zm3 4v5h2V7H9zm4 0v5h2V7h-2z"/></svg></a>
+                <a href="#" title="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2c-.2-1-1-1.8-2-2C17.8 4.5 12 4.5 12 4.5s-5.8 0-7.6.3c-1 .2-1.8 1-2 2-.4 1.7-.4 5.3-.4 5.3s0 3.6.4 5.3c.2 1 1 1.8 2 2 1.8.3 7.6.3 7.6.3s5.8 0 7.6-.3c1-.2 1.8-1 2-2 .4-1.7.4-5.3.4-5.3s0-3.6-.4-5.3zM10 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="block">
+          <div class="block-tab">Office hours</div>
+          <div class="block-body">
+            <div class="cal-line">
+              <div class="cal-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 2v2M17 2v2M4 7h16M5 9v10a2 2 0 002 2h10a2 2 0 002-2V9"/></svg>
+              </div>
+              <div>
+                <strong>Next session</strong>
+                <p><span id="office-datetime">May 15, 2026 · 12:00 PM PST</span></p>
+                <p class="muted" style="margin-top:6px;">Sign up in the Discord <strong style="color: rgba(255,255,255,0.85);">Event</strong> tab for a reminder. Hang with the team and ask anything.</p>
+              </div>
+            </div>
+            <div>
+              <strong>On brand</strong>
+              <p>The AI-powered 2D game studio — cohesive assets to playable prototypes. You stay in control.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="questions-box">
+        <p>Can’t make it? Drop questions in <code>#stream-questions</code> — we’ll pull them live.</p>
+        <div class="bubble" aria-hidden="true">?</div>
+      </div>
+
+      <div class="challenge">
+        <div class="challenge-copy">
+          <h3>Animation challenge — still open</h3>
+          <p>Head to <strong style="color: #fff;">Makko.ai</strong> → create an animation → share it with the community.</p>
+          <p class="faded">Prize copy and eligibility: replace with your official giveaway rules (e.g. win a copy of <em>Crimson Desert</em> — subject to regions / keys).</p>
+        </div>
+        <figure class="polaroid">
+          <div class="photo">
+            <!-- Add when approved: <img src="./assets/your-prize-key-art.png" alt="Prize game" style="width:100%;height:100%;object-fit:cover;" /> -->
+            <div class="ph">Prize key art<br />(drop image here)</div>
+          </div>
+        </figure>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#">Join Discord</a>
+        <a class="btn btn-secondary" href="#">Makko.ai</a>
+      </div>
+
+      <div class="footer-line"><span class="star" aria-hidden="true">✦</span> See you there <span class="star" aria-hidden="true">✦</span></div>
+      <p class="brand-lockup">MAKKO.AI</p>
+    </article>
+  </div>
+
+  <script>
+    if (new URLSearchParams(location.search).has("vertical")) {
+      document.body.classList.add("vertical");
+    }
+  </script>
+</body>
+</html>

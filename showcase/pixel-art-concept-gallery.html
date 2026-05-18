@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rift Runners x Makko.ai 05/12 stream update page in our weekly live build devlog series." />
+  <title>Rift Runners x Makko.ai | 05/12 Stream Update</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --nav: #080e1a;
+      --sub: #0d1524;
+      --tabs: #152338;
+      --cards: #172740;
+      --accent: #3b8edf;
+      --mint: #7ee7ff;
+      --text: #e8f1ff;
+      --muted: #9cb2cf;
+      --b1: rgba(255, 255, 255, 0.1);
+      --b2: rgba(255, 255, 255, 0.08);
+      --b3: rgba(255, 255, 255, 0.05);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 520px at 75% -10%, rgba(126, 231, 255, 0.24), transparent 60%),
+        radial-gradient(900px 420px at 10% 0%, rgba(157, 77, 255, 0.2), transparent 60%),
+        linear-gradient(145deg, #070d19 0%, #101a2b 44%, #1a2d48 100%);
+    }
+    .shell { max-width: 1280px; margin: 0 auto; padding: 18px; }
+    .topbar {
+      position: sticky; top: 12px; z-index: 10;
+      background: rgba(8, 14, 26, 0.88);
+      border: 1px solid var(--b1); border-radius: 4px;
+      backdrop-filter: blur(8px);
+      padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.2px; }
+    .brand img { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--b2); }
+    .btn { border-radius: 6px; border: 1px solid var(--b1); color: var(--text); text-decoration: none; display: inline-block; padding: 9px 12px; font-size: 14px; margin-left: 8px; background: rgba(255, 255, 255, 0.03); }
+    .btn.primary { background: var(--accent); border-color: rgba(59, 142, 223, 0.65); box-shadow: 0 0 18px rgba(59, 142, 223, 0.25); }
+    .hero { border-radius: 4px; overflow: hidden; border: 1px solid var(--b1); background: var(--sub); margin-bottom: 14px; }
+    .hero-art {
+      min-height: 560px; position: relative; display: flex; align-items: flex-end; padding: 28px;
+      background:
+        linear-gradient(105deg, rgba(7, 12, 20, 0.94) 0%, rgba(7, 12, 20, 0.55) 42%, rgba(7, 12, 20, 0.2) 100%),
+        linear-gradient(to top, rgba(7, 12, 20, 0.85), transparent 45%),
+        url("/showcase/5-12/RiftRunners5-12-Update-Hero.png") center 22% / cover no-repeat;
+    }
+    .hero-copy { max-width: 760px; position: relative; z-index: 2; }
+    .logo-lockup-text {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(126, 231, 255, 0.35);
+      background: rgba(8, 14, 26, 0.58);
+      color: #dff5ff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .eyebrow { color: var(--mint); text-transform: uppercase; letter-spacing: 0.09em; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+    h1 { margin: 0 0 10px; font-size: clamp(30px, 4vw, 56px); line-height: 1.04; }
+    h2 { margin: 0 0 10px; font-size: 24px; }
+    h3 { margin: 0 0 8px; font-size: 18px; }
+    p { margin: 0; color: var(--muted); }
+    .summary { margin-top: 12px; border-radius: 4px; border: 1px solid rgba(59,142,223,0.34); background: rgba(59,142,223,0.14); padding: 12px; color: #dbe9ff; }
+    .hero-actions { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .exec-summary {
+      margin: 0 0 14px;
+      border-radius: 4px;
+      border: 1px solid var(--b2);
+      background: var(--cards);
+      padding: 14px;
+    }
+    .exec-summary p {
+      color: #dbe8fb;
+      line-height: 1.55;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .card { border-radius: 4px; border: 1px solid var(--b2); background: var(--cards); padding: 14px; }
+    .gdd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    .glossary {
+      border: 1px solid var(--b3);
+      border-radius: 4px;
+      background: var(--tabs);
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .glossary ul { margin: 0; padding-left: 18px; color: #d9e9ff; }
+    .glossary li { margin-bottom: 7px; }
+    .glossary img { width: 100%; height: 130px; object-fit: cover; border-radius: 4px; border: 1px solid var(--b3); margin-bottom: 8px; display: block; }
+    .gdd-panel { border: 1px solid var(--b3); border-radius: 4px; background: var(--tabs); padding: 10px; }
+    .gdd-panel img { width: 100%; height: 130px; object-fit: cover; border-radius: 4px; border: 1px solid var(--b3); margin-bottom: 8px; display: block; }
+    .kicker {
+      color: var(--mint);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .verb-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .verb {
+      border: 1px solid rgba(126,231,255,0.35);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      color: #dff5ff;
+      background: rgba(126,231,255,0.1);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .loop-board { margin-top: 10px; border: 1px solid var(--b3); border-radius: 4px; background: var(--tabs); padding: 10px; }
+    .loop-hero { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; border: 1px solid var(--b3); margin-bottom: 8px; display: block; }
+    .loop-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 8px; }
+    .loop-step { border: 1px solid var(--b3); border-radius: 4px; background: rgba(255,255,255,0.03); padding: 8px; font-size: 12px; color: #dbe9ff; }
+    .loop-step strong { display: block; font-size: 12px; margin-bottom: 4px; color: #fff; }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .subcopy { color: var(--muted); margin-bottom: 10px; }
+    iframe { width: 100%; border: 1px solid var(--b3); border-radius: 4px; display: block; background: #000; }
+    .scene-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    .shot { border-radius: 4px; overflow: hidden; border: 1px solid var(--b3); background: #0f1a2b; }
+    .shot img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .shot span { display: block; padding: 8px; font-size: 12px; color: #d8e8ff; letter-spacing: 0.05em; text-transform: uppercase; border-top: 1px solid var(--b3); }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { border: 1px solid rgba(126,231,255,0.35); border-radius: 999px; padding: 5px 10px; font-size: 12px; color: #dff5ff; background: rgba(126,231,255,0.1); }
+    .drop-list { margin: 0; padding-left: 18px; color: #d9e9ff; }
+    .drop-list li { margin-bottom: 8px; }
+    .week-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+    .week { border: 1px solid var(--b3); border-radius: 4px; overflow: hidden; background: #0f1a2b; }
+    .week img { width: 100%; height: 140px; object-fit: cover; display: block; }
+    .week .copy { padding: 10px; }
+    .week .wk { color: var(--mint); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+    .week p { margin-top: 6px; font-size: 13px; }
+    .faq-list { margin: 0; padding-left: 18px; color: #d9e9ff; }
+    .faq-list li { margin-bottom: 9px; }
+    .cta-band { margin-top: 14px; border-radius: 4px; border: 1px solid var(--b1); background: var(--nav); padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .next-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .next-card { border: 1px solid var(--b3); border-radius: 4px; background: var(--tabs); overflow: hidden; }
+    .next-card img { width: 100%; height: 170px; object-fit: cover; display: block; border-bottom: 1px solid var(--b3); }
+    .next-copy { padding: 10px; }
+    .next-copy h3 { margin: 0 0 6px; }
+    .next-actions { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tiny { color: var(--muted); font-size: 13px; }
+
+    /* Comic field guide layout: characters teach via panels + speech */
+    .comic-strip-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0a0e18;
+      background: #f5d547;
+      border: 2px solid #0a0e18;
+      box-shadow: 3px 3px 0 #0a0e18;
+    }
+    .comic-page {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 6px;
+      border: 2px solid #0a0e18;
+      background:
+        radial-gradient(420px 220px at 78% 0%, rgba(126, 231, 255, 0.12), transparent 60%),
+        linear-gradient(180deg, #18263f 0%, #121e32 100%);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+    }
+    .comic-page .comic-strip-label { margin-bottom: 10px; }
+    .comic-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .comic-row--discord {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .discord-image-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .discord-image-row > .comic-panel { height: 100%; }
+    .discord-side-image-panel {
+      padding: 0 !important;
+      display: flex;
+      overflow: hidden;
+    }
+    .comic-panel {
+      position: relative;
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      background: #0f1a2b;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+    }
+    .comic-panel--tall .comic-panel-art { min-height: 220px; }
+    .comic-panel-art {
+      position: relative;
+      display: block;
+      margin: 0;
+    }
+    figure.comic-panel-art { margin: 0; }
+    .comic-panel-art img {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .comic-panel--sm .comic-panel-art img { min-height: 140px; }
+    .comic-panel--hero .comic-panel-art img { min-height: 260px; object-position: center 25%; }
+    .speech {
+      position: absolute;
+      z-index: 3;
+      max-width: min(92%, 320px);
+      margin: 0;
+      padding: 10px 14px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: clamp(14px, 1.9vw, 17px);
+      font-weight: 700;
+      line-height: 1.35;
+      color: #12121c;
+      background: #fffef6;
+      border: 3px solid #0a0e18;
+      border-radius: 18px;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+    }
+    .speech em { font-style: italic; font-weight: 700; color: #1a3a6e; }
+    .speech--tl { top: 10px; left: 10px; }
+    .speech--tr { top: 10px; right: 10px; }
+    .speech--bl { bottom: 10px; left: 10px; }
+    .speech--br { bottom: 10px; right: 10px; }
+    .speech--bc { bottom: 12px; left: 50%; transform: translateX(-50%); max-width: min(94%, 400px); }
+    .speech--tail-l::after {
+      content: "";
+      position: absolute;
+      left: -14px;
+      bottom: 18px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right-color: #0a0e18;
+      border-left: 0;
+    }
+    .speech--tail-l::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      bottom: 21px;
+      width: 0;
+      height: 0;
+      border: 7px solid transparent;
+      border-right-color: #fffef6;
+      border-left: 0;
+      z-index: 1;
+    }
+    .speech--tail-r::after {
+      content: "";
+      position: absolute;
+      right: -14px;
+      bottom: 18px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-left-color: #0a0e18;
+      border-right: 0;
+    }
+    .speech--tail-r::before {
+      content: "";
+      position: absolute;
+      right: -9px;
+      bottom: 21px;
+      width: 0;
+      height: 0;
+      border: 7px solid transparent;
+      border-left-color: #fffef6;
+      border-right: 0;
+      z-index: 1;
+    }
+    .speech--tail-t::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: -14px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-bottom-color: #0a0e18;
+      border-top: 0;
+    }
+    .speech--tail-t::before {
+      content: "";
+      position: absolute;
+      left: 31px;
+      top: -8px;
+      width: 0;
+      height: 0;
+      border: 7px solid transparent;
+      border-bottom-color: #fffef6;
+      border-top: 0;
+      z-index: 1;
+    }
+    .comic-caption {
+      margin: 0;
+      padding: 10px 12px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #dbe9ff;
+      background: linear-gradient(180deg, #152338 0%, #101a2c 100%);
+      border-top: 3px solid #0a0e18;
+    }
+    .comic-caption strong { color: #fff; font-weight: 700; }
+    /* Beat labels sit above speech bubbles (bubbles were covering “Beat 2”, etc.) */
+    .comic-beat-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 5;
+      white-space: nowrap;
+      background: #f5d547;
+      color: #0a0e18;
+      padding: 4px 8px;
+      border: 2px solid #0a0e18;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .comic-gutter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #0a0e18;
+      user-select: none;
+    }
+    .hero-art { position: relative; }
+    .hero-comic-stack {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: min(340px, 38vw);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hero-comic-stack .comic-panel { box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5); }
+    .hero-comic-stack .comic-panel-art img { min-height: 120px; object-position: center 30%; }
+    .hero .hero-copy { text-shadow: 0 1px 18px rgba(0, 0, 0, 0.65); }
+    .briefing-strip {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.95fr) 1.4fr;
+      gap: 0;
+      margin-top: 12px;
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+      background: #152338;
+    }
+    .briefing-strip__art {
+      position: relative;
+      border-right: 3px solid #0a0e18;
+    }
+    .briefing-strip__art img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+      object-position: center 35%;
+    }
+    .briefing-strip__script {
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background:
+        radial-gradient(400px 200px at 80% 0%, rgba(126, 231, 255, 0.12), transparent 55%),
+        #121c2e;
+    }
+    .briefing-line {
+      position: relative;
+      margin: 0;
+      padding: 10px 12px 10px 16px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #12121c;
+      background: #fffef6;
+      border: 3px solid #0a0e18;
+      border-radius: 16px;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+    }
+    .briefing-line .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 26px;
+      margin-right: 8px;
+      font-size: 13px;
+      color: #fff;
+      background: #0a0e18;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+    .scene-gallery.comic-release {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .scene-gallery.comic-release .shot {
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+    }
+    .scene-gallery.comic-release .shot img { height: 200px; }
+    .scene-gallery.comic-release .shot-footer {
+      padding: 10px 10px 12px;
+      background: linear-gradient(180deg, #152338 0%, #101a2c 100%);
+      border-top: 3px solid #0a0e18;
+    }
+    .scene-gallery.comic-release .shot-bubble {
+      margin: 0 0 8px;
+      padding: 8px 10px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #12121c;
+      background: #fffef6;
+      border: 2px solid #0a0e18;
+      border-radius: 12px;
+    }
+    .scene-gallery.comic-release .shot-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--mint);
+    }
+    .next-card.comic-cta { border: 3px solid #0a0e18; box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35); }
+    .next-card.comic-cta .next-visual { position: relative; }
+    .next-card.comic-cta img { border-bottom: 3px solid #0a0e18; }
+    .next-card.comic-cta .cta-bubble {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      margin: 0;
+      padding: 10px 12px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #12121c;
+      background: #fffef6;
+      border: 3px solid #0a0e18;
+      border-radius: 16px;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+    }
+    .exec-summary.comic-narrator {
+      border: 3px solid #0a0e18;
+      background: #fffef6;
+      box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.35);
+    }
+    .exec-summary.comic-narrator h2 {
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      color: #0a0e18;
+    }
+    .exec-summary.comic-narrator p {
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      color: #2a2a38;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 1100px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .gdd-grid, .scene-gallery, .week-grid, .loop-grid, .next-grid { grid-template-columns: 1fr 1fr; }
+      .comic-row { grid-template-columns: 1fr; }
+      .briefing-strip { grid-template-columns: 1fr; }
+      .briefing-strip__art { border-right: none; border-bottom: 3px solid #0a0e18; }
+      .briefing-strip__art img { min-height: 220px; }
+      .hero-comic-stack {
+        position: static;
+        width: 100%;
+        margin-top: 14px;
+      }
+    }
+    @media (max-width: 700px) {
+      .gdd-grid, .scene-gallery, .week-grid, .loop-grid, .split-grid, .next-grid { grid-template-columns: 1fr; }
+      .topbar { position: static; }
+      .cta-band { flex-direction: column; align-items: flex-start; }
+      .speech--bc { transform: none; left: 10px; right: 10px; max-width: none; }
+      .strip-3, .masonry-a, .masonry-nested, .skew-grid { grid-template-columns: 1fr; }
+      .before-after-grid, .doc-grid-2 { grid-template-columns: 1fr; }
+      .discord-image-row { grid-template-columns: 1fr; }
+    }
+
+    /* Live podcast devlog flow */
+    .devlog-flow { display: flex; flex-direction: column; gap: 14px; margin-bottom: 14px; }
+    .devlog-section { scroll-margin-top: 88px; }
+    .card.devlog-section {
+      position: relative;
+      border: 3px solid #0a0e18;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.42);
+      background:
+        radial-gradient(420px 200px at 95% 0%, rgba(126, 231, 255, 0.09), transparent 58%),
+        linear-gradient(180deg, #172740 0%, #132237 100%);
+    }
+    .card.devlog-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.14;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.62) 1px, transparent 1px);
+      background-size: 5px 5px;
+      mix-blend-mode: multiply;
+    }
+    .section-head {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .section-num {
+      color: #0a0e18;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      display: inline-block;
+      margin: 0;
+      padding: 5px 9px;
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      background: #7ee7ff;
+      box-shadow: 2px 2px 0 #0a0e18;
+      line-height: 1;
+    }
+    .section-head h2 {
+      margin: 0;
+      padding: 7px 11px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: clamp(20px, 2.3vw, 29px);
+      letter-spacing: 0.03em;
+      color: #0a0e18;
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      background: #f5d547;
+      box-shadow: 3px 3px 0 #0a0e18;
+      line-height: 1.1;
+    }
+    .subcopy {
+      position: relative;
+      z-index: 1;
+      color: #e3eeff;
+      margin-bottom: 12px;
+      line-height: 1.55;
+      padding: 10px 12px 10px 14px;
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      background: rgba(9, 15, 27, 0.56);
+    }
+    .subcopy::before {
+      content: "FIELD NOTE";
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      padding: 2px 7px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #0a0e18;
+      border: 2px solid #0a0e18;
+      border-radius: 3px;
+      background: #7ee7ff;
+      line-height: 1;
+    }
+    .field-note {
+      position: relative;
+      margin: 0;
+      padding: 10px 12px 10px 14px;
+      color: #e3eeff;
+      line-height: 1.55;
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      background: rgba(9, 15, 27, 0.56);
+    }
+    .field-note::before {
+      content: "FIELD NOTE";
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      padding: 2px 7px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #0a0e18;
+      border: 2px solid #0a0e18;
+      border-radius: 3px;
+      background: #7ee7ff;
+      line-height: 1;
+    }
+    .video-frame {
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+      background: #000;
+      margin: 0;
+    }
+    .video-frame video,
+    .video-frame iframe { width: 100%; display: block; aspect-ratio: 16 / 9; vertical-align: top; border: 0; }
+    .discord-memo-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .discord-memo-panel img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .before-after-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .before-after-grid figure {
+      margin: 0;
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #0f1a2b;
+    }
+    .before-after-grid img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-bottom: 2px solid #0a0e18;
+      background: #d9d9d9;
+    }
+    .before-after-grid figcaption {
+      position: relative;
+      padding: 10px 8px 8px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #dff5ff;
+      font-weight: 700;
+      background: rgba(9, 15, 27, 0.56);
+      border-top: 2px solid #0a0e18;
+    }
+    .before-after-grid figcaption::before {
+      content: "FIELD NOTE";
+      display: inline-block;
+      margin: 0 0 5px;
+      padding: 2px 6px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #0a0e18;
+      border: 2px solid #0a0e18;
+      border-radius: 3px;
+      background: #7ee7ff;
+      line-height: 1;
+    }
+    #discord-plug .section-head h2 {
+      font-size: clamp(16px, 1.7vw, 21px);
+      line-height: 1.2;
+    }
+    .design-doc {
+      border: 2px solid #0a0e18;
+      border-radius: 6px;
+      background:
+        radial-gradient(420px 220px at 10% 0%, rgba(126, 231, 255, 0.12), transparent 60%),
+        linear-gradient(180deg, #18263f 0%, #121e32 100%);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+      padding: 14px;
+    }
+    .design-doc p { color: #dbe9ff; line-height: 1.5; }
+    .design-doc h3 {
+      margin: 14px 0 8px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 18px;
+      color: #f4f8ff;
+    }
+    .design-doc .doc-lead {
+      margin: 0 0 10px;
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      background: rgba(10, 14, 24, 0.42);
+      padding: 10px 12px;
+    }
+    .doc-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .doc-card {
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      background: rgba(21, 35, 56, 0.9);
+      padding: 10px;
+    }
+    .doc-card ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: #dbe9ff;
+      line-height: 1.5;
+    }
+    .doc-card li { margin-bottom: 6px; }
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid #0a0e18;
+      background: rgba(12, 22, 38, 0.86);
+      margin-top: 8px;
+    }
+    .doc-table th,
+    .doc-table td {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+      color: #dbe9ff;
+      line-height: 1.45;
+    }
+    .doc-table th {
+      color: #f4f8ff;
+      background: rgba(126, 231, 255, 0.1);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .design-doc .pill-row { margin-top: 8px; }
+    .design-doc pre {
+      margin: 8px 0 0;
+      white-space: pre-wrap;
+      background: rgba(10, 14, 24, 0.6);
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      color: #e8f1ff;
+      padding: 10px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .video-caption {
+      position: relative;
+      margin: 0;
+      padding: 10px 12px 10px 14px;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #e3eeff;
+      border-top: 2px solid #0a0e18;
+      background: rgba(9, 15, 27, 0.62);
+      line-height: 1.5;
+    }
+    .video-caption::before {
+      content: "FIELD NOTE";
+      display: inline-block;
+      margin: 0 0 6px;
+      padding: 2px 7px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #0a0e18;
+      border: 2px solid #0a0e18;
+      border-radius: 3px;
+      background: #7ee7ff;
+      line-height: 1;
+    }
+    .panel-right-still {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      background: #0d1320;
+    }
+    .skew-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .skew-grid > .comic-page { transform: rotate(-0.35deg); }
+    .skew-grid > .comic-page:nth-child(even) { transform: rotate(0.35deg); }
+    .strip-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    .masonry-a { display: grid; grid-template-columns: 1.15fr 1fr; gap: 10px; align-items: start; }
+    .masonry-nested { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+    .full-hero-panel .video-frame video,
+    .full-hero-panel .video-frame iframe { aspect-ratio: 21 / 9; min-height: 280px; }
+    .coming-soon-panel {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--tabs);
+      border: 2px dashed rgba(126, 231, 255, 0.4);
+      border-radius: 4px;
+      color: var(--muted);
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .coming-soon-panel strong { color: var(--text); font-size: 15px; }
+    .author-note-panel {
+      border: 3px solid #0a0e18;
+      background: #fffef6;
+      color: #2a2a38;
+      padding: 16px 18px;
+      box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.35);
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    .author-note-panel h2 { color: #0a0e18; font-family: inherit; }
+    .hero-art.halftone {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+      background:
+        linear-gradient(105deg, rgba(7, 12, 20, 0.94) 0%, rgba(7, 12, 20, 0.55) 42%, rgba(7, 12, 20, 0.2) 100%),
+        linear-gradient(to top, rgba(7, 12, 20, 0.85), transparent 45%),
+        url("/showcase/5-12/RiftRunners5-12-Update-Hero.png") center 22% / cover no-repeat;
+    }
+    .hero-art.halftone::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.55) 1px, transparent 1px);
+      background-size: 5px 5px;
+      mix-blend-mode: multiply;
+    }
+    .prompt-purpose-switcher {
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+    .prompt-purpose-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      background: rgba(9, 15, 27, 0.62);
+      padding: 10px;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+    }
+    .prompt-purpose-btn {
+      width: 100%;
+      text-align: left;
+      border: 2px solid #0a0e18;
+      border-radius: 4px;
+      background: #fffef6;
+      color: #0a0e18;
+      font-family: "Comic Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 9px 10px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+    }
+    .prompt-purpose-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+    }
+    .prompt-purpose-btn.is-active {
+      background: #f5d547;
+      box-shadow: 3px 3px 0 #0a0e18;
+    }
+    .prompt-purpose-player {
+      border: 3px solid #0a0e18;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+      background: #000;
+      margin: 0;
+    }
+    .prompt-purpose-player iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 700px) {
+      .prompt-purpose-switcher { grid-template-columns: 1fr; }
+    }
+    .btn.build-cta { background: #f5d547; color: #0a0e18; border-color: #0a0e18; font-weight: 700; }
+    .btn.build-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 0 #0a0e18; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/showcase/index.html" style="text-decoration: none; color: inherit;">
+        <img src="./assets/makko-mark-placeholder.svg" alt="Makko icon" />
+        <span>Rift Runners x Makko.ai</span>
+      </a>
+      <nav class="rr-global-nav" aria-label="Rift Runners site"></nav>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a class="btn" href="/lore/novel/index.html">Lore</a>
+        <a class="btn build-cta primary" href="https://www.makko.ai/" target="_blank" rel="noopener noreferrer">Build Your Game</a>
+      </div>
+    </header>
+
+    <main class="devlog-flow" id="devlog">
+
+    <!-- 2. Show intro -->
+    <section class="hero devlog-section" id="show-intro" aria-labelledby="show-intro-title">
+      <div class="hero-art halftone">
+        <div class="hero-copy">
+          <div class="eyebrow">Rift Runners stream update 05/12</div>
+          <div class="logo-lockup-text">Week 01 // 5-12-2026</div>
+          <h1 id="show-intro-title">Stream Update: Rift Runners Live Build</h1>
+          <p>
+            This page captures the 05/12 stream update for Rift Runners. We will publish a new page in this same format
+            every week so each live build session has its own update.
+          </p>
+          <div class="summary">
+            <strong>This week's update (05/12):</strong> Brandon, Jeremy, Tony, and Cesar build Rift Runners in public: architecture,
+            AI workflows, collections, concept art passes, and the first playable start screen. Next week's stream gets a new page.
+          </div>
+          <div class="hero-actions">
+            <a class="btn build-cta primary" href="https://www.makko.ai/" target="_blank" rel="noopener noreferrer">Build Your Game</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Discord plug -->
+    <section class="card devlog-section comic-page" id="discord-plug" aria-labelledby="discord-title">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2 id="discord-title">Join Discord to get your questions answered, hang with the dev team and other builders, and enter community competitions where we give away free games.</h2>
+      </div>
+      <div class="comic-row comic-row--discord">
+        <figure class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/FE1V74KukQg"
+            title="Discord community clip"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+          <figcaption class="video-caption">Live community Q&amp;A, ongoing giveaways, and regular Discord contests happen all the time. Join to get help fast and stay close to the team.</figcaption>
+        </figure>
+        <div class="discord-image-row">
+          <div class="comic-panel discord-memo-panel" style="background: var(--tabs); padding: 14px; border: 3px solid #0a0e18;">
+            <img src="./assets/weekly-stream-office-hours-memo.png" alt="Weekly stream and office-hours community memo" />
+            <p class="field-note">
+              Use Discord for live Q&amp;A, office hours reminders, stream follow-ups, and challenge announcements.
+              This is the fastest place to get unblocked and stay in the loop.
+            </p>
+            <div class="hero-actions" style="margin-top: 10px;">
+              <a class="btn primary" href="https://discord.gg/jw8bTFJZ" target="_blank" rel="noopener noreferrer" style="margin-left: 0;">Join Discord</a>
+              <a class="btn" href="https://www.youtube.com/@PlayMyGamesNow" target="_blank" rel="noopener noreferrer">Watch stream clips</a>
+            </div>
+          </div>
+          <div class="comic-panel discord-side-image-panel" style="background: var(--tabs); border: 3px solid #0a0e18;">
+            <img class="panel-right-still" src="./RR-Update-week-1-panel-1-right.png" alt="Rift Runners update week 1 panel 1 right visual" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Explaining Rift Runners -->
+    <section class="card devlog-section" id="explaining-rift-runners" aria-labelledby="explain-title">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 id="explain-title">What Rift Runners feels like to play: core fantasy, pacing, and moment-to-moment feel</h2>
+      </div>
+      <div class="skew-grid">
+        <article class="comic-page">
+          <span class="comic-strip-label">Panel A: core fantasy</span>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/2xXH-dTkRyA"
+              title="Brandon explains Rift Runners"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">Rifts are tearing the city apart. Brandon explains the fiction, puzzle-platforming loop, and why Rift Runners can showcase multiple art styles in one world.</figcaption>
+          </figure>
+        </article>
+        <article class="comic-page">
+          <span class="comic-strip-label">Panel B: why this world</span>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/OhcgZ9P11MY"
+              title="Brandon Rift Runner first prompt"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">The team breaks down MVP scope, core mechanics, and how design-doc decisions directly shape stronger prompts and better prototypes.</figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <section class="card devlog-section" id="rift-runner-design-doc" aria-labelledby="design-doc-title">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2 id="design-doc-title">Showcase game concept design doc: Rift Runner</h2>
+      </div>
+      <div class="design-doc">
+        <p class="doc-lead"><strong>One-line concept:</strong> Rift Runner is a 2D run-based action game where players dive into collapsing dimensions, recover world fragments, and reassemble a living city hub that changes gameplay each week.</p>
+
+        <div class="doc-grid-2">
+          <article class="doc-card">
+            <h3>Why this is stronger than “2D platforming roguelike”</h3>
+            <ul>
+              <li><strong>Player fantasy:</strong> high-speed recovery missions through unstable worlds.</li>
+              <li><strong>Core verbs:</strong> breach, route, recover, extract, rebuild.</li>
+              <li><strong>Meta progression:</strong> recovered fragments physically rebuild the hub.</li>
+              <li><strong>Weekly novelty:</strong> every drop adds a district fracture, mutator, boss, and upgrade.</li>
+            </ul>
+          </article>
+          <article class="doc-card">
+            <h3>Player fantasy and tone</h3>
+            <ul>
+              <li>You are a licensed runner in a city stitched from fractured realities.</li>
+              <li>Every run is high risk and has visible consequences in the hub.</li>
+              <li>Tone: high-contrast sci-fantasy, practical and gritty, no parody.</li>
+            </ul>
+            <div class="pill-row">
+              <span class="pill">Readable movement</span>
+              <span class="pill">Meaningful run choices</span>
+              <span class="pill">Visible progress</span>
+              <span class="pill">Weekly content drops</span>
+            </div>
+          </article>
+        </div>
+
+        <h3>Core game loop</h3>
+        <table class="doc-table" aria-label="Rift Runner core game loop">
+          <thead>
+            <tr><th>Step</th><th>Player action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Choose a contract in the hub (fracture type + risk profile).</td></tr>
+            <tr><td>2</td><td>Enter the fracture run and clear combat-traversal rooms.</td></tr>
+            <tr><td>3</td><td>Secure one primary fragment plus optional side fragments.</td></tr>
+            <tr><td>4</td><td>Choose: extract now or push deeper for higher rewards.</td></tr>
+            <tr><td>5</td><td>Return to hub and spend resources on permanent upgrades.</td></tr>
+            <tr><td>6</td><td>Unlock new contracts and higher-risk modifiers.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Session structure (10-18 minute target)</h3>
+        <table class="doc-table" aria-label="Session structure">
+          <thead>
+            <tr><th>Stage</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Entry zone</td><td>Teach current mutator safely.</td></tr>
+            <tr><td>Route split</td><td>Decision point: safer path vs higher reward path.</td></tr>
+            <tr><td>Elite gate</td><td>Build pressure and test readiness.</td></tr>
+            <tr><td>Boss arena</td><td>Two-phase climax encounter.</td></tr>
+            <tr><td>Extraction</td><td>Escape sequence with outcome lock-in.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Hero V1 kit and enemy identity</h3>
+        <div class="doc-grid-2">
+          <article class="doc-card">
+            <ul>
+              <li><strong>Primary:</strong> pulse blade combo</li>
+              <li><strong>Secondary:</strong> charge shot (armor break)</li>
+              <li><strong>Mobility:</strong> dash with i-frames</li>
+              <li><strong>Utility:</strong> tether pull (mobility + crowd control)</li>
+              <li><strong>Ultimate:</strong> overdrive burst for clutch clears</li>
+              <li><strong>Design rule:</strong> each weekly mutator must touch at least one kit component.</li>
+            </ul>
+          </article>
+          <article class="doc-card">
+            <table class="doc-table" aria-label="Enemy factions">
+              <thead><tr><th>Faction</th><th>Behavior identity</th></tr></thead>
+              <tbody>
+                <tr><td>Signal Cult</td><td>Zoning, delayed explosions, area denial.</td></tr>
+                <tr><td>Glass Choir</td><td>Precision volleys, shields, reflections.</td></tr>
+                <tr><td>Vine Court</td><td>Swarm pressure, slows, stacking debuffs.</td></tr>
+                <tr><td>Ash Foundry</td><td>Heavy armor, knockback hazards, heat pressure.</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+
+        <h3>Progression and weekly drop framework</h3>
+        <div class="doc-grid-2">
+          <article class="doc-card">
+            <ul>
+              <li><strong>In-run economy:</strong> Charge (temporary buffs), Keys (risk rooms/rerolls).</li>
+              <li><strong>Meta economy:</strong> Fragments (permanent currency), Relics (build archetypes).</li>
+              <li><strong>District upgrades:</strong> forge, lab, transit, archive.</li>
+            </ul>
+          </article>
+          <article class="doc-card">
+            <ul>
+              <li>One fracture district variant</li>
+              <li>One featured boss</li>
+              <li>One global mutator</li>
+              <li>One new relic or district upgrade</li>
+              <li>One creator challenge contract</li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>Art direction, MVP scope, and prompt strategy</h3>
+        <p>Style target: cohesive stylized 2D with clear silhouettes and readable combat timing. Start with extensible placeholder assets (manifest-driven), then polish late. Menus/UI should stay lightweight until core loop quality is proven.</p>
+        <div class="doc-grid-2">
+          <article class="doc-card">
+            <h3 style="margin-top:0;">MVP checklist</h3>
+            <ul>
+              <li>Platform exploration loop with horizontal + vertical traversal</li>
+              <li>Collect rift key and complete run</li>
+              <li>Main menu + contract selection</li>
+              <li>Procedural level generation from explicit rules</li>
+              <li>Core movement, damage/death, hazards</li>
+              <li>Rift key progression into base rebuild + story beats</li>
+            </ul>
+          </article>
+          <article class="doc-card">
+            <h3 style="margin-top:0;">Parking lot</h3>
+            <ul>
+              <li>Powers and advanced abilities</li>
+              <li>Puzzles and secondary keys</li>
+              <li>Dynamic art assets per run</li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>Prompt framing reference</h3>
+        <pre>Initial prompt (too broad):
+"I want to create a cyberpunk style game called Rift Runners ... first phase is creating the main menu ... placeholder assets ... extensible components ..."
+
+Improved prompt strategy:
+Break work into discrete implementation phases and request a markdown plan with actionable prompts for each phase (core loop, contract select, procedural level rules, movement, hazards, progression, and polish).</pre>
+      </div>
+    </section>
+
+    <!-- 5. Working with AI & philosophy -->
+    <section class="card devlog-section" id="ai-philosophy" aria-labelledby="ai-title">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2 id="ai-title">AI speed with human creative control</h2>
+      </div>
+      <article class="card" style="margin: 0; background: var(--tabs);">
+        <h3>Human review is the quality gate. Judgment keeps output intentional.</h3>
+        <div class="before-after-grid" aria-label="Human in the loop before and after example">
+          <figure>
+            <img src="./assets/human-in-loop-before-sketch.png" alt="Simple hand-drawn sketch used as creative input" />
+            <figcaption>Before: quick sketch</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/human-in-loop-after-concept.png" alt="Polished generated concept based on the original sketch" />
+            <figcaption>After: generated concept</figcaption>
+          </figure>
+        </div>
+        <figure class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/gymoLIO3yQo"
+            title="Human in the loop philosophy"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+          <figcaption class="video-caption">Jeremy’s core philosophy: creators stay in control. You can start from a rough drawing and still land exactly where your vision needs to go.</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <!-- 6. First plan -->
+    <section class="card devlog-section" id="first-plan" aria-labelledby="plan-title">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2 id="plan-title">Plan the game with a design doc and get started.</h2>
+      </div>
+      <div>
+        <figure class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/rIDEitCRO1w"
+            title="First plan submitted"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+          <figcaption class="video-caption">After initial prompting, Makko returns a structured plan. Brandon and Jeremy walk viewers through how to read it and decide what to build next.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 7. Prompt with purpose -->
+    <section class="card devlog-section" id="prompt-with-purpose" aria-labelledby="prompt-purpose-title">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2 id="prompt-purpose-title">Prompt with purpose - practical playbook for creators</h2>
+      </div>
+      <figure class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/VamLYOntMu8"
+          title="Cesar asks the team how they prompt"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+        <figcaption class="video-caption">Cesar asks the team one practical question: how do you prompt to get useful output fast?</figcaption>
+      </figure>
+      <div class="prompt-purpose-switcher" data-prompt-switcher>
+        <aside class="prompt-purpose-buttons" aria-label="Choose speaker">
+          <button type="button" class="prompt-purpose-btn is-active" data-video-id="jM0f14YyJvU" data-video-title="Best first prompt Jeremy" data-video-caption="Jeremy: getting good output on the first pass.">Jeremy</button>
+          <button type="button" class="prompt-purpose-btn" data-video-id="pq7MwgXTakI" data-video-title="Best first prompt Cesar" data-video-caption="Cesar: framing prompts for customer-facing output.">Cesar</button>
+          <button type="button" class="prompt-purpose-btn" data-video-id="UChnIG4oGxQ" data-video-title="Best first prompt Tony" data-video-caption="Tony: translating your PRD into better prompts.">Tony</button>
+        </aside>
+        <figure class="prompt-purpose-player">
+          <iframe
+            id="prompt-purpose-player"
+            src="https://www.youtube.com/embed/jM0f14YyJvU"
+            title="Best first prompt Jeremy"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+          <figcaption id="prompt-purpose-caption" class="video-caption">Jeremy: getting good output on the first pass.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 8. Collections & concept art -->
+    <section class="card devlog-section" id="collections-art" aria-labelledby="collections-title">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2 id="collections-title">Lock style consistency, then iterate fast for cohesive art with rapid iteration</h2>
+      </div>
+      <div class="strip-3">
+        <article>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/QtdFs4FJd-I"
+              title="Collections and style variety"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">A little bit of everything for everyone: Cesar showcases style range in Makko, while the team demonstrates how Collections keep art coherent and fast.</figcaption>
+          </figure>
+        </article>
+        <article>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/3T4VVvN0I7w"
+              title="Concept art first prompt to iterate"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">Tony starts in a Comix Zone direction and the team iterates toward a sci-fi delivery-runner identity with stronger gameplay readability.</figcaption>
+          </figure>
+        </article>
+        <article>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/_PYYZN5PBrI"
+              title="First iteration character"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">Character iteration pass: multiple blue/orange palettes to land a Rift Runner silhouette that pops in motion and in game.</figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9. Iteration sprint to playable -->
+    <section class="card devlog-section full-hero-panel" id="code-iteration" aria-labelledby="code-title">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2 id="code-title">From rough draft to playable build: iterate, polish, and ship</h2>
+      </div>
+      <div class="strip-3" style="margin-bottom: 10px;">
+        <article>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/_6fgS1E4xtY"
+              title="First iteration city character setup"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">Character readability pass: silhouette, pose, and combat clarity.</figcaption>
+          </figure>
+        </article>
+        <article>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/hPTui_neqew"
+              title="Iteration 2 that's the louvre"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">Second art generation round for the city hub. New variants include locations like a synth food bar and oxygen bar as the world fiction sharpens.</figcaption>
+          </figure>
+        </article>
+        <article>
+          <figure class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/_PYYZN5PBrI"
+              title="First iteration checkpoint"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="video-caption">Checkpoint before final integration: using color and costume choices to make the runner readable in-game.</figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <!-- 10. Creator packaging -->
+    <section class="card devlog-section" id="upcoming" aria-labelledby="upcoming-title">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2 id="upcoming-title">WE DID IT! Rift Runners Protoyped!</h2>
+      </div>
+      <article class="card" style="margin: 0; background: var(--tabs);">
+        <h3>Ask clearly and get usable output. Prompt precision matters.</h3>
+        <figure class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/60ASJWl7TSY"
+            title="Gamecomplete clip"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+          <figcaption class="video-caption">Bad input gives bad output. The team explains how to fix exact-but-too-literal results and why menu polish should wait until gameplay is stable.</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <!-- 11. Author note -->
+    <section class="card devlog-section" id="dogfooding" aria-labelledby="dogfood-title">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h2 id="dogfood-title">Author's note: Dogfooding Makko</h2>
+      </div>
+      <p class="field-note">
+        Jeremy closes on why we build this show inside the same tools you use: if something breaks the creator experience, we feel it immediately and fix it quickly.
+      </p>
+      <figure class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/43cp831vJi4"
+          title="Dogfooding Makko clip"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+        <figcaption class="video-caption">Why creator intent and clear prompts still decide final quality.</figcaption>
+      </figure>
+    </section>
+
+    </main>
+  </div>
+  <script>
+    (() => {
+      const switcher = document.querySelector("[data-prompt-switcher]");
+      if (!switcher) return;
+      const buttons = [...switcher.querySelectorAll(".prompt-purpose-btn")];
+      const player = document.getElementById("prompt-purpose-player");
+      const caption = document.getElementById("prompt-purpose-caption");
+      if (!buttons.length || !player || !caption) return;
+
+      const setActive = (btn) => {
+        const videoId = btn.getAttribute("data-video-id");
+        const videoTitle = btn.getAttribute("data-video-title") || "Prompt clip";
+        const videoCaption = btn.getAttribute("data-video-caption") || "";
+        if (!videoId) return;
+        player.src = `https://www.youtube.com/embed/${videoId}`;
+        player.title = videoTitle;
+        caption.textContent = videoCaption;
+        buttons.forEach((b) => b.classList.toggle("is-active", b === btn));
+      };
+
+      buttons.forEach((btn) => btn.addEventListener("click", () => setActive(btn)));
+    })();
+  </script>
+</body>
+</html>

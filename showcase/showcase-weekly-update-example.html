@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makko Showcase Weekly Update | Rift Runners</title>
+  <style>
+    :root {
+      --studio-nav: #080e1a;
+      --studio-subheader: #0d1524;
+      --studio-canvas: #111c2e;
+      --studio-tabs: #152338;
+      --studio-cards: #172740;
+      --studio-tabs-hover: #1a2d48;
+      --studio-accent: #3b8edf;
+      --text-main: #e8f1ff;
+      --text-muted: #9cb2cf;
+      --border-strong: rgba(255, 255, 255, 0.1);
+      --border-medium: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.05);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text-main);
+      line-height: 1.45;
+      background: radial-gradient(1200px 500px at 80% -10%, rgba(59, 142, 223, 0.24), transparent 60%),
+        radial-gradient(700px 300px at 20% 10%, rgba(157, 77, 255, 0.18), transparent 65%),
+        linear-gradient(135deg, #080e1a 0%, #152338 52%, #1a2d48 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 120px 120px;
+      mask-image: radial-gradient(circle at 50% 10%, black 20%, transparent 85%);
+      z-index: 0;
+    }
+
+    .shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+      background: rgba(8, 14, 26, 0.86);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      border: 1px solid var(--border-medium);
+    }
+
+    .btn {
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+      background: transparent;
+      padding: 9px 12px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 8px;
+    }
+
+    .btn.primary {
+      background: var(--studio-accent);
+      border-color: rgba(59, 142, 223, 0.7);
+      box-shadow: 0 0 18px rgba(59, 142, 223, 0.25);
+    }
+
+    .eyebrow {
+      color: var(--studio-accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero {
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--studio-subheader);
+      margin-bottom: 14px;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 560px;
+      background: linear-gradient(to right, rgba(8, 14, 26, 0.9), rgba(8, 14, 26, 0.45)),
+        url("./assets/rift-hero-elite.svg") center/cover no-repeat;
+      padding: 30px;
+      display: flex;
+      align-items: end;
+    }
+
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(126, 231, 255, 0) 0%, rgba(126, 231, 255, 0.16) 45%, rgba(126, 231, 255, 0) 100%);
+      transform: translateX(-100%);
+      animation: sweep 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(126, 231, 255, 0.18), rgba(126, 231, 255, 0) 45%),
+        radial-gradient(circle at 20% 20%, rgba(157, 77, 255, 0.14), rgba(157, 77, 255, 0) 42%);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      max-width: 700px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .logo-lockup {
+      max-width: 760px;
+      width: 100%;
+      margin: 0 0 12px;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
+    }
+
+    .trailer-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn.trailer {
+      background: rgba(126, 231, 255, 0.15);
+      border-color: rgba(126, 231, 255, 0.45);
+      box-shadow: 0 0 18px rgba(126, 231, 255, 0.2);
+    }
+
+    h1, h2, h3, h4 { margin: 0 0 10px; }
+    h1 { font-size: clamp(28px, 4vw, 46px); line-height: 1.1; }
+    p { margin: 0 0 10px; color: var(--text-muted); }
+
+    .answer-first {
+      margin-top: 14px;
+      background: rgba(59, 142, 223, 0.14);
+      border: 1px solid rgba(59, 142, 223, 0.24);
+      border-radius: 4px;
+      padding: 12px;
+      color: #dbe9ff;
+      max-width: 690px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 12px;
+      border-top: 1px solid var(--border-strong);
+      background: var(--studio-nav);
+    }
+
+    .metric {
+      background: var(--studio-tabs);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 10px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 20px;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .scene-strip {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+
+    .scene-card {
+      background: var(--studio-cards);
+      border: 1px solid var(--border-medium);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .scene-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-wall {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .feature-wall .scene-card img {
+      height: 320px;
+    }
+
+    .callout {
+      position: relative;
+      overflow: hidden;
+      background: #0D1524;
+    }
+
+    .callout::before {
+      content: "";
+      position: absolute;
+      inset: -30% -10%;
+      background: radial-gradient(circle at 60% 40%, rgba(59, 142, 223, 0.35), rgba(59, 142, 223, 0));
+      pointer-events: none;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .shot {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border-medium);
+      background: #0D1524;
+      min-height: 180px;
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.1) contrast(1.03);
+    }
+
+    .shot span {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #dff2ff;
+      text-transform: uppercase;
+      background: rgba(8, 14, 26, 0.74);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 4px;
+      padding: 6px 8px;
+    }
+
+    .scene-card .copy {
+      padding: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--studio-cards);
+      border: 1px solid var(--border-medium);
+      border-radius: 4px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      background: rgba(59, 142, 223, 0.16);
+      border: 1px solid rgba(59, 142, 223, 0.28);
+      border-radius: 999px;
+      color: #dcecff;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    ul { margin: 0; padding-left: 20px; color: var(--text-muted); }
+    li { margin-bottom: 8px; }
+
+    .timeline {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .step {
+      background: var(--studio-tabs);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 4px;
+      background: rgba(59, 142, 223, 0.22);
+      border: 1px solid rgba(59, 142, 223, 0.35);
+      display: grid;
+      place-items: center;
+      color: #cde4ff;
+      font-weight: 800;
+    }
+
+    .chapter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--studio-tabs);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 9px 10px;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .faq {
+      margin-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+
+    .faq h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #f3f7ff;
+    }
+
+    .cta-strip {
+      background: var(--studio-nav);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+    }
+
+    iframe {
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+      background: #000;
+      display: block;
+    }
+
+    .asset-preview {
+      width: 100%;
+      border: 1px solid var(--border-medium);
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 10px;
+      background: var(--studio-tabs);
+    }
+
+    @media (max-width: 980px) {
+      .scene-strip, .feature-wall, .screenshot-grid, .layout { grid-template-columns: 1fr; }
+      .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+      .topbar { position: static; }
+    }
+
+    @keyframes sweep {
+      0% { transform: translateX(-100%); opacity: 0; }
+      15% { opacity: 1; }
+      50% { transform: translateX(100%); opacity: 0.85; }
+      100% { transform: translateX(150%); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="./assets/makko-mark-placeholder.svg" alt="Makko mark placeholder" />
+        <span>Makko AI • Weekly Showcase</span>
+      </div>
+      <nav class="rr-global-nav" aria-label="Rift Runners site" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+        <a class="btn" href="/showcase/index.html">Weekly drops</a>
+        <a class="btn" href="/lore/novel/index.html">Graphic novel</a>
+      </nav>
+      <div>
+        <a class="btn" href="#">Art Studio</a>
+        <a class="btn" href="#">Collections</a>
+        <a class="btn" href="#">Code Studio</a>
+        <a class="btn primary" href="#">See Pricing</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-art">
+        <div class="hero-copy">
+          <div class="eyebrow">Rift Runners • Weekly Update • Week 01</div>
+          <img class="logo-lockup" src="./assets/rift-runners-logo-elite.svg" alt="Rift Runners title lockup" />
+          <h1>Neon Ruins Uprising: Signal Warden Breakpoint</h1>
+          <p>This version is intentionally visual-first: large gameplay art, visual story beats, and clear "what changed" blocks that feel like Makko, not a generic devlog template.</p>
+          <div class="answer-first">
+            <strong>Answer-first summary:</strong> We shipped a playable district fracture, boss phase transition pass, and a live EMP mutator that changes ability timing decisions in every run.
+          </div>
+          <div class="trailer-row">
+            <a class="btn trailer" href="#">Watch Reveal Trailer</a>
+            <a class="btn primary" href="#">Playtest Signup</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><span class="muted">Weekly drop</span><strong>01</strong></div>
+        <div class="metric"><span class="muted">New systems</span><strong>3</strong></div>
+        <div class="metric"><span class="muted">Capture moments</span><strong>7</strong></div>
+        <div class="metric"><span class="muted">Updated assets</span><strong>42</strong></div>
+      </div>
+    </section>
+
+    <section class="scene-strip">
+      <article class="scene-card">
+        <img src="./assets/rift-biome-elite.svg" alt="Neon ruins biome concept art" />
+        <div class="copy">
+          <h3>District Fracture: Neon Ruins</h3>
+          <p>High-contrast hazard routes built for clear camera readability.</p>
+        </div>
+      </article>
+      <article class="scene-card">
+        <img src="./assets/rift-ui-elite.svg" alt="Mutator system UI concept art" />
+        <div class="copy">
+          <h3>Mutator State UI</h3>
+          <p>EMP slot lock cadence displayed as obvious run pressure.</p>
+        </div>
+      </article>
+      <article class="scene-card">
+        <img src="./assets/rift-boss-elite.svg" alt="Signal Warden boss concept art" />
+        <div class="copy">
+          <h3>Boss Reveal Moment</h3>
+          <p>Signal Warden silhouette and phase pressure read instantly on capture.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="feature-wall">
+      <article class="scene-card callout">
+        <img src="./assets/rift-boss-elite.svg" alt="Signal Warden vertical key art" />
+        <div class="copy">
+          <h3>Featured Enemy: Signal Warden</h3>
+          <p>Phase-based boss with telegraphed burst windows and high visual identity for weekly trailers.</p>
+        </div>
+      </article>
+      <article class="scene-card">
+        <img src="./assets/rift-ui-elite.svg" alt="Rift Runners systems panel" />
+        <div class="copy">
+          <h3>Systems Depth Snapshot</h3>
+          <p>Mutator pressure, cooldown economy, and run-state signals captured like a premium game page.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="screenshot-grid">
+      <div class="shot">
+        <img src="./assets/rift-hero-elite.svg" alt="Rift Runners key art screenshot" />
+        <span>Hero Moment</span>
+      </div>
+      <div class="shot">
+        <img src="./assets/rift-biome-elite.svg" alt="Neon Ruins gameplay scene screenshot" />
+        <span>Neon Ruins Route</span>
+      </div>
+      <div class="shot">
+        <img src="./assets/rift-boss-elite.svg" alt="Signal Warden encounter screenshot" />
+        <span>Boss Phase Shift</span>
+      </div>
+    </section>
+
+    <div class="layout">
+      <main>
+        <section class="card">
+          <h2>What shipped this week</h2>
+          <ul>
+            <li><strong>District:</strong> Neon Ruins with vertical hazard routing.</li>
+            <li><strong>Boss:</strong> Signal Warden with readable two-phase pressure.</li>
+            <li><strong>Mutator:</strong> EMP Storms disable one ability slot every 20 seconds.</li>
+            <li><strong>Loadout:</strong> Volt Dancer tuned for risk/reward pathing.</li>
+            <li><strong>Hub change:</strong> Dock Ward unlocks high-volatility contract cards.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Boss systems</span>
+            <span class="chip">Mutator gameplay</span>
+            <span class="chip">Collections consistency</span>
+            <span class="chip">Playable proof</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Livestream replay</h2>
+          <p>Example embed (replace with this week's replay URL on publish).</p>
+          <iframe width="100%" height="390" src="https://www.youtube.com/embed/bEDQj6WeZxE" title="Makko weekly showcase replay" frameborder="0" allowfullscreen></iframe>
+        </section>
+
+        <section class="card">
+          <h2>Workflow breakdown (human in the loop)</h2>
+          <div class="timeline">
+            <div class="step"><div class="badge">1</div><div><strong>Style lock</strong><p>Collections constraints set first to keep district, enemies, and VFX cohesive.</p></div></div>
+            <div class="step"><div class="badge">2</div><div><strong>Gameplay-first pass</strong><p>Mutator logic tuned before polish so run decisions drive the visual story.</p></div></div>
+            <div class="step"><div class="badge">3</div><div><strong>Encounter readability</strong><p>Boss telegraphs and camera-safe composition validated in real play.</p></div></div>
+            <div class="step"><div class="badge">4</div><div><strong>Capture package</strong><p>Hero shot, boss transition, and mutator trigger clips exported for web + shorts.</p></div></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>FAQ (citation-ready)</h2>
+          <div class="faq">
+            <h4>What changed in Week 01?</h4>
+            <p>Week 01 adds Neon Ruins district logic, Signal Warden boss behavior, and EMP mutator pressure that changes loadout decisions mid-run.</p>
+          </div>
+          <div class="faq">
+            <h4>Is this visual-only or gameplay-impacting?</h4>
+            <p>Gameplay-impacting: route safety, ability timing, and boss windows changed with this update.</p>
+          </div>
+          <div class="faq">
+            <h4>What should creators do next?</h4>
+            <p>Review the encounter pipeline, then start in Makko with Collections + animation workflow and move to playable assembly.</p>
+          </div>
+        </section>
+
+        <section class="cta-strip">
+          <div>
+            <h3 style="margin:0;">Build your own weekly drop engine</h3>
+            <div class="muted">Use the same integrated workflow from cohesive assets to playable weekly updates.</div>
+          </div>
+          <div>
+            <a class="btn" href="#">See Workflow</a>
+            <a class="btn primary" href="#">Start on Makko</a>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <section class="card">
+          <h2>Chapter beats</h2>
+          <div class="chapter-row"><span>00:00</span><span>Week summary</span></div>
+          <div class="chapter-row"><span>03:42</span><span>District fracture pass</span></div>
+          <div class="chapter-row"><span>09:18</span><span>Boss phase tuning</span></div>
+          <div class="chapter-row"><span>14:30</span><span>EMP mutator behavior</span></div>
+          <div class="chapter-row"><span>21:50</span><span>Full run showcase</span></div>
+        </section>
+
+        <section class="card">
+          <h2>Visual proof panel</h2>
+          <img class="asset-preview" src="./assets/rift-ui-elite.svg" alt="HUD and systems visual panel" />
+          <p class="muted">This block is for static gameplay-system proof screenshots each week.</p>
+        </section>
+
+        <section class="card">
+          <h2>Internal links</h2>
+          <ul>
+            <li><a style="color:#9ec5ff;" href="#">/art-studio</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/collections</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/animation</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/code-studio</a></li>
+            <li><a style="color:#9ec5ff;" href="#">/pricing</a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

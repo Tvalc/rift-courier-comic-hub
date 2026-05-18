@@ -1,0 +1,31 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="20" y1="20" x2="860" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1524"/>
+      <stop offset="1" stop-color="#172740"/>
+    </linearGradient>
+    <linearGradient id="sword" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#B9DBFF"/>
+      <stop offset="1" stop-color="#3B8EDF"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="520" rx="12" fill="url(#bg)"/>
+  <rect x="8" y="8" width="884" height="504" rx="8" stroke="rgba(255,255,255,0.1)"/>
+  <circle cx="730" cy="130" r="72" fill="rgba(59,142,223,0.14)"/>
+  <circle cx="170" cy="430" r="96" fill="rgba(59,142,223,0.08)"/>
+
+  <path d="M115 430L220 275L260 315L170 455L115 430Z" fill="rgba(59,142,223,0.22)"/>
+  <path d="M255 330L320 250L372 270L286 365L255 330Z" fill="rgba(255,255,255,0.14)"/>
+
+  <path d="M430 360L510 220L550 238L465 382L430 360Z" fill="url(#sword)"/>
+  <path d="M448 376L536 228" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+  <rect x="520" y="245" width="70" height="18" rx="4" transform="rotate(-58 520 245)" fill="#172740" stroke="rgba(255,255,255,0.2)"/>
+
+  <path d="M390 400L348 320L370 232L455 210L528 270L510 360L445 408L390 400Z" fill="#1A2D48" stroke="rgba(255,255,255,0.12)"/>
+  <path d="M427 238L447 252L438 280L409 284L395 262L404 241L427 238Z" fill="#3B8EDF"/>
+  <path d="M484 290L505 306L499 335L470 344L449 325L456 297L484 290Z" fill="#3B8EDF"/>
+  <path d="M371 305L390 312L395 336L373 352L348 344L344 318L371 305Z" fill="#3B8EDF"/>
+
+  <text x="38" y="68" fill="#DCEBFF" font-family="Inter, Segoe UI, sans-serif" font-size="30" font-weight="700">Rift Runners — Hero Key Art Placeholder</text>
+  <text x="38" y="98" fill="#9CB2CF" font-family="Inter, Segoe UI, sans-serif" font-size="16">Makko-style tones, readability-first silhouette, high-contrast action framing.</text>
+</svg>
